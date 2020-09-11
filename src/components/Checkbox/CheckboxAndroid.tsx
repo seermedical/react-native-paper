@@ -86,7 +86,7 @@ const CheckboxAndroid = ({
         useNativeDriver: false,
       }),
     ]).start();
-  }, [status]);
+  }, [scaleAnim, status, theme]);
 
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
