@@ -72,7 +72,11 @@ class CardCover extends React.Component<Props> {
 
     return (
       <View style={[styles.container, coverStyle, style]}>
-        <Image {...rest} style={[styles.image, coverStyle]} />
+        <Image
+          accessibilityIgnoresInvertColors
+          {...rest}
+          style={[styles.image, coverStyle]}
+        />
       </View>
     );
   }

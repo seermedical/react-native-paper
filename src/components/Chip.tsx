@@ -11,15 +11,15 @@ import {
   ViewStyle,
 } from 'react-native';
 import color from 'color';
+import { withTheme } from '../core/theming';
+import { black, white } from '../styles/colors';
+import type { EllipsizeProp } from '../types';
 import type { IconSource } from './Icon';
 import Icon from './Icon';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple/TouchableRipple';
-import { withTheme } from '../core/theming';
-import { black, white } from '../styles/colors';
-import type { EllipsizeProp } from '../types';
 
 type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -264,7 +264,7 @@ class Chip extends React.Component<Props, State> {
           accessibilityTraits={accessibilityTraits}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityState={accessibilityState}
+          accessibilityState={accessibilityState} // eslint-disable-line react-native-a11y/has-valid-accessibility-state -- bug
           testID={testID}
         >
           <View style={[styles.content, { paddingRight: onClose ? 32 : 4 }]}>
@@ -326,8 +326,6 @@ class Chip extends React.Component<Props, State> {
           <View style={styles.closeButtonStyle}>
             <TouchableWithoutFeedback
               onPress={onClose}
-              accessibilityTraits="button"
-              accessibilityComponentType="button"
               accessibilityRole="button"
               accessibilityLabel={closeIconAccessibilityLabel}
             >
