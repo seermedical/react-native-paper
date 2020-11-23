@@ -62,6 +62,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   accessibilityLabel?: string;
   /**
+   * Customise the number of lines shown. Default is `1`.
+   */
+  numberOfLines?: number;
+  /**
    * Function to execute on press.
    */
   onPress?: () => void;
@@ -134,6 +138,7 @@ const Button = ({
   accessibilityLabel,
   onPress,
   onLongPress,
+  numberOfLines,
   style,
   theme,
   contentStyle,
@@ -287,7 +292,7 @@ const Button = ({
             />
           ) : null}
           <Text
-            numberOfLines={1}
+            numberOfLines={numberOfLines ?? 1}
             style={[
               styles.label,
               compact && styles.compactLabel,
