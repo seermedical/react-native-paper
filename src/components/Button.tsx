@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  TextProps,
 } from 'react-native';
 import color from 'color';
 
@@ -80,6 +81,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   labelStyle?: StyleProp<TextStyle>;
   /**
+   * Custom props for the button text.
+   */
+  labelProps?: TextProps;
+  /**
    * @optional
    */
   theme: ReactNativePaper.Theme;
@@ -137,6 +142,8 @@ const Button = ({
   style,
   theme,
   contentStyle,
+  labelProps,
+  hitSlop,
   labelStyle,
   testID,
   accessible,
@@ -276,6 +283,7 @@ const Button = ({
         accessibilityState={{ disabled }}
         accessible={accessible}
         disabled={disabled}
+        hitSlop={hitSlop}
         rippleColor={rippleColor}
         style={touchableStyle}
         testID={testID}
@@ -316,6 +324,7 @@ const Button = ({
               font,
               labelStyle,
             ]}
+            {...labelProps}
           >
             {children}
           </Text>
