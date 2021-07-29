@@ -852,6 +852,7 @@ const BottomNavigation = ({
                             })
                           ) : (
                             <Text
+                              allowFontScaling={false}
                               style={[styles.label, { color: activeTintColor }]}
                             >
                               {getLabelText({ route })}
@@ -873,6 +874,7 @@ const BottomNavigation = ({
                               })
                             ) : (
                               <Text
+                                allowFontScaling={false}
                                 selectable={false}
                                 style={[
                                   styles.label,
