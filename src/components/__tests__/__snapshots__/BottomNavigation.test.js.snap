@@ -3168,6 +3168,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -3207,6 +3208,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   selectable={false}
                   style={
                     Array [
@@ -3443,6 +3445,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -3482,6 +3485,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   selectable={false}
                   style={
                     Array [
@@ -3718,6 +3722,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -3757,6 +3762,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   selectable={false}
                   style={
                     Array [
@@ -4121,6 +4127,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -4356,6 +4363,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -4591,6 +4599,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -4934,6 +4943,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -4973,6 +4983,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   selectable={false}
                   style={
                     Array [
@@ -5209,6 +5220,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -5248,6 +5260,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   selectable={false}
                   style={
                     Array [
@@ -5484,6 +5497,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -5523,6 +5537,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   selectable={false}
                   style={
                     Array [
@@ -5887,6 +5902,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -6122,6 +6138,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -6357,6 +6374,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -6592,6 +6610,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
@@ -6827,6 +6846,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   style={
                     Array [
                       Object {
