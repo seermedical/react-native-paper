@@ -23,7 +23,6 @@ type Props = {
    * - `label`: optional label text
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
-   * - `labelTextColor`: custom label text color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
    * - `small`: boolean describing whether small or normal sized FAB is rendered. Defaults to `true`
@@ -58,6 +57,22 @@ type Props = {
    * Function to execute on pressing the `FAB`.
    */
   onPress?: () => void;
+  /**
+   * Function to execute on long pressing the `FAB`.
+   */
+  onLongPress?: () => void;
+  /**
+   * Whether to prevent opening the FAB group by default on press
+   */
+  preventStateChangeOnPress?: boolean;
+  /**
+   * Optional label for extended `FAB`.
+   */
+  label?: string;
+  /**
+   * Make the label text uppercased.
+   */
+  uppercase?: boolean;
   /**
    * Whether the speed dial is open.
    */
@@ -153,8 +168,12 @@ type Props = {
 const FABGroup = ({
   actions,
   icon,
+  label,
   open,
   onPress,
+  onLongPress,
+  preventStateChangeOnPress,
+  uppercase,
   accessibilityLabel,
   theme,
   style,
@@ -353,10 +372,12 @@ const FABGroup = ({
           ))}
         </View>
         <FAB
+          label={label}
           onPress={() => {
             onPress?.();
-            toggle();
+            preventStateChangeOnPress || toggle();
           }}
+          onLongPress={() => onLongPress?.()}
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}
@@ -366,6 +387,7 @@ const FABGroup = ({
           accessibilityRole="button"
           accessibilityState={{ expanded: open }}
           style={[styles.fab, fabStyle]}
+          uppercase={uppercase}
           visible={visible}
           testID={testID}
         />
