@@ -307,6 +307,8 @@ const Button = ({
           ) : null}
           {loading ? (
             <ActivityIndicator
+              size={customLabelSize || 16}
+              color={customLabelColor || textColor}
               size={customLabelSize ?? 16}
               color={
                 typeof customLabelColor === 'string'
