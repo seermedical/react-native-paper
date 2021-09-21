@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   AccessibilityState,
-  AccessibilityTrait,
   Animated,
   Platform,
   StyleProp,
@@ -161,15 +160,13 @@ const Chip = ({
   };
 
   const { dark, colors } = theme;
+  const defaultBackgroundColor =
+    mode === 'outlined' ? colors.surface : dark ? '#383838' : '#ebebeb';
 
   const {
-    backgroundColor = mode === 'outlined'
-      ? colors.surface
-      : dark
-      ? '#383838'
-      : '#ebebeb',
+    backgroundColor = defaultBackgroundColor,
     borderRadius = 16,
-  } = StyleSheet.flatten(style) || {};
+  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   const borderColor =
     mode === 'outlined'
@@ -194,9 +191,14 @@ const Chip = ({
         .alpha(0.54)
         .rgb()
         .string();
+
+  const backgroundColorString =
+    typeof backgroundColor === 'string'
+      ? backgroundColor
+      : defaultBackgroundColor;
   const selectedBackgroundColor = (dark
-    ? color(backgroundColor).lighten(mode === 'outlined' ? 0.2 : 0.4)
-    : color(backgroundColor).darken(mode === 'outlined' ? 0.08 : 0.2)
+    ? color(backgroundColorString).lighten(mode === 'outlined' ? 0.2 : 0.4)
+    : color(backgroundColorString).darken(mode === 'outlined' ? 0.08 : 0.2)
   )
     .rgb()
     .string();
@@ -205,7 +207,7 @@ const Chip = ({
     ? color(selectedColor).fade(0.5).rgb().string()
     : selectedBackgroundColor;
 
-  const accessibilityTraits: AccessibilityTrait[] = ['button'];
+  const accessibilityTraits = ['button'];
   const accessibilityState: AccessibilityState = {
     selected,
     disabled,
@@ -240,7 +242,7 @@ const Chip = ({
       <TouchableRipple
         borderless
         delayPressIn={0}
-        style={{ borderRadius }}
+        style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={handlePressIn}
@@ -248,6 +250,7 @@ const Chip = ({
         underlayColor={underlayColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
+        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={accessibilityTraits}
         accessibilityComponentType="button"
         accessibilityRole="button"
@@ -288,6 +291,7 @@ const Chip = ({
             </View>
           ) : null}
           <Text
+            selectable={false}
             numberOfLines={1}
             style={[
               styles.text,
@@ -309,6 +313,7 @@ const Chip = ({
         <View style={styles.closeButtonStyle}>
           <TouchableWithoutFeedback
             onPress={onClose}
+            // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
             accessibilityTraits="button"
             accessibilityComponentType="button"
             accessibilityRole="button"
@@ -333,7 +338,7 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: StyleSheet.hairlineWidth,
     borderStyle: 'solid',
-    flexDirection: 'row',
+    flexDirection: Platform.select({ default: 'column', web: 'row' }),
   },
   content: {
     flexDirection: 'row',
@@ -374,6 +379,9 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  touchable: {
+    flex: 1,
   },
 });
 

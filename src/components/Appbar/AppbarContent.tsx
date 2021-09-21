@@ -108,8 +108,9 @@ const AppbarContent = ({
           numberOfLines={1}
           accessible
           accessibilityTraits="header"
-          // @ts-ignore Type '"heading"' is not assignable to type ...
+          // @ts-expect-error React Native doesn't accept 'heading' as it's web-only
           accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
+          allowFontScaling={false} // Prevent headers from scaling text size
         >
           {title}
         </Text>
@@ -117,6 +118,7 @@ const AppbarContent = ({
           <Text
             style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
             numberOfLines={1}
+            allowFontScaling={false} // Prevent headers from scaling text size
           >
             {subtitle}
           </Text>
@@ -144,4 +146,6 @@ const styles = StyleSheet.create({
 export default withTheme(AppbarContent);
 
 // @component-docs ignore-next-line
-export { AppbarContent };
+const AppbarContentWithTheme = withTheme(AppbarContent);
+// @component-docs ignore-next-line
+export { AppbarContentWithTheme as AppbarContent };

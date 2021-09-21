@@ -7,6 +7,7 @@ import {
   TextStyle,
   LayoutChangeEvent,
   Animated,
+  ViewStyle,
 } from 'react-native';
 
 import { withTheme } from '../../../core/theming';
@@ -15,8 +16,14 @@ import { AdornmentSide } from './enums';
 const AFFIX_OFFSET = 12;
 
 type Props = {
+  /**
+   * Text to show.
+   */
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
+  /**
+   * Style that is passed to the Text element.
+   */
   textStyle?: StyleProp<TextStyle>;
   /**
    * @optional
@@ -30,6 +37,7 @@ type ContextState = {
   visible?: Animated.Value;
   textStyle?: StyleProp<TextStyle>;
   side: AdornmentSide;
+  paddingHorizontal?: number | string;
 };
 
 const AffixContext = React.createContext<ContextState>({
@@ -43,7 +51,15 @@ const AffixAdornment: React.FunctionComponent<
     affix: React.ReactNode;
     testID: string;
   } & ContextState
-> = ({ affix, side, textStyle, topPosition, onLayout, visible }) => {
+> = ({
+  affix,
+  side,
+  textStyle,
+  topPosition,
+  onLayout,
+  visible,
+  paddingHorizontal,
+}) => {
   return (
     <AffixContext.Provider
       value={{
@@ -52,6 +68,7 @@ const AffixAdornment: React.FunctionComponent<
         topPosition,
         onLayout,
         visible,
+        paddingHorizontal,
       }}
     >
       {affix}
@@ -59,19 +76,58 @@ const AffixAdornment: React.FunctionComponent<
   );
 };
 
+/**
+ * A component to render a leading / trailing text in the TextInput
+ *
+ * <div class="screenshots">
+ *   <figure>
+ *     <img class="medium" src="screenshots/textinput-outline.affix.png" />
+ *   </figure>
+ * </div>
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { TextInput } from 'react-native-paper';
+ *
+ * const MyComponent = () => {
+ *   const [text, setText] = React.useState('');
+ *
+ *   return (
+ *     <TextInput
+ *       mode="outlined"
+ *       label="Outlined input"
+ *       placeholder="Type something"
+ *       right={<TextInput.Affix text="/100" />}
+ *     />
+ *   );
+ * };
+ *
+ * export default MyComponent;
+ * ```
+ */
+
 const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
-  const { textStyle, onLayout, topPosition, side, visible } = React.useContext(
-    AffixContext
-  );
+  const {
+    textStyle,
+    onLayout,
+    topPosition,
+    side,
+    visible,
+    paddingHorizontal,
+  } = React.useContext(AffixContext);
   const textColor = color(theme.colors.text)
     .alpha(theme.dark ? 0.7 : 0.54)
     .rgb()
     .string();
 
+  const offset =
+    typeof paddingHorizontal === 'number' ? paddingHorizontal : AFFIX_OFFSET;
+
   const style = {
     top: topPosition,
-    [side]: AFFIX_OFFSET,
-  };
+    [side]: offset,
+  } as ViewStyle;
 
   return (
     <Animated.View

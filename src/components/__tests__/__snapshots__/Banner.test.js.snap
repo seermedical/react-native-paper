@@ -70,6 +70,8 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Object {
@@ -155,6 +157,8 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Object {
@@ -231,12 +235,15 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             >
               <Text
                 numberOfLines={1}
+                selectable={false}
                 style={
                   Array [
                     Object {
                       "color": "#000000",
                       "fontFamily": "System",
                       "fontWeight": "400",
+                    },
+                    Object {
                       "textAlign": "left",
                     },
                     Array [
@@ -335,6 +342,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Object {
@@ -411,12 +420,15 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             >
               <Text
                 numberOfLines={1}
+                selectable={false}
                 style={
                   Array [
                     Object {
                       "color": "#000000",
                       "fontFamily": "System",
                       "fontWeight": "400",
+                    },
+                    Object {
                       "textAlign": "left",
                     },
                     Array [
@@ -506,12 +518,15 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             >
               <Text
                 numberOfLines={1}
+                selectable={false}
                 style={
                   Array [
                     Object {
                       "color": "#000000",
                       "fontFamily": "System",
                       "fontWeight": "400",
+                    },
+                    Object {
                       "textAlign": "left",
                     },
                     Array [
@@ -611,6 +626,8 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Object {
@@ -695,6 +712,8 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
                 "color": "#000000",
                 "fontFamily": "System",
                 "fontWeight": "400",
+              },
+              Object {
                 "textAlign": "left",
               },
               Object {

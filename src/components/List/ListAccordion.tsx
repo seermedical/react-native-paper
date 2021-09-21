@@ -7,6 +7,7 @@ import {
   StyleProp,
   TextStyle,
   I18nManager,
+  GestureResponderEvent,
 } from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -29,6 +30,10 @@ type Props = {
    */
   left?: (props: { color: string }) => React.ReactNode;
   /**
+   * Callback which returns a React element to display on the right side.
+   */
+  right?: (props: { isExpanded: boolean }) => React.ReactNode;
+  /**
    * Whether the accordion is expanded
    * If this prop is provided, the accordion will behave as a "controlled component".
    * You'll need to update this prop when you want to toggle the component or on `onPress`.
@@ -38,6 +43,10 @@ type Props = {
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * Content of the section.
    */
@@ -76,6 +85,10 @@ type Props = {
    * TestID used for testing purposes
    */
   testID?: string;
+  /**
+   * Accessibility label for the TouchableRipple. This is read by the screen reader when the user taps the touchable.
+   */
+  accessibilityLabel?: string;
 };
 
 /**
@@ -123,6 +136,7 @@ type Props = {
  */
 const ListAccordion = ({
   left,
+  right,
   title,
   description,
   children,
@@ -135,7 +149,9 @@ const ListAccordion = ({
   id,
   testID,
   onPress,
+  onLongPress,
   expanded: expandedProp,
+  accessibilityLabel,
 }: Props) => {
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
@@ -171,60 +187,77 @@ const ListAccordion = ({
       : handlePressAction;
   return (
     <View>
-      <TouchableRipple
-        style={[styles.container, style]}
-        onPress={handlePress}
-        accessibilityTraits="button"
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        testID={testID}
-      >
-        <View style={styles.row} pointerEvents="none">
-          {left
-            ? left({
-                color: isExpanded ? theme.colors.primary : descriptionColor,
-              })
-            : null}
-          <View style={[styles.item, styles.content]}>
-            <Text
-              numberOfLines={titleNumberOfLines}
-              style={[
-                styles.title,
-                {
-                  color: isExpanded ? theme.colors.primary : titleColor,
-                },
-                titleStyle,
-              ]}
-            >
-              {title}
-            </Text>
-            {description && (
+      <View style={{ backgroundColor: theme.colors.background }}>
+        <TouchableRipple
+          style={[styles.container, style]}
+          onPress={handlePress}
+          onLongPress={onLongPress}
+          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
+          accessibilityTraits="button"
+          accessibilityComponentType="button"
+          accessibilityRole="button"
+          accessibilityState={{ expanded: isExpanded }}
+          accessibilityLabel={accessibilityLabel}
+          testID={testID}
+          delayPressIn={0}
+          borderless
+        >
+          <View style={styles.row} pointerEvents="none">
+            {left
+              ? left({
+                  color: isExpanded ? theme.colors.primary : descriptionColor,
+                })
+              : null}
+            <View style={[styles.item, styles.content]}>
               <Text
-                numberOfLines={descriptionNumberOfLines}
+                selectable={false}
+                numberOfLines={titleNumberOfLines}
                 style={[
-                  styles.description,
+                  styles.title,
                   {
-                    color: descriptionColor,
+                    color: isExpanded ? theme.colors.primary : titleColor,
                   },
-                  descriptionStyle,
+                  titleStyle,
                 ]}
               >
-                {description}
+                {title}
               </Text>
-            )}
+              {description ? (
+                <Text
+                  selectable={false}
+                  numberOfLines={descriptionNumberOfLines}
+                  style={[
+                    styles.description,
+                    {
+                      color: descriptionColor,
+                    },
+                    descriptionStyle,
+                  ]}
+                >
+                  {description}
+                </Text>
+              ) : null}
+            </View>
+            <View
+              style={[styles.item, description ? styles.multiline : undefined]}
+            >
+              {right ? (
+                right({
+                  isExpanded: isExpanded,
+                })
+              ) : (
+                <MaterialCommunityIcon
+                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                  color={titleColor}
+                  size={24}
+                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                />
+              )}
+            </View>
           </View>
-          <View
-            style={[styles.item, description ? styles.multiline : undefined]}
-          >
-            <MaterialCommunityIcon
-              name={isExpanded ? 'chevron-up' : 'chevron-down'}
-              color={titleColor}
-              size={24}
-              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-            />
-          </View>
-        </View>
-      </TouchableRipple>
+        </TouchableRipple>
+      </View>
+
       {isExpanded
         ? React.Children.map(children, (child) => {
             if (

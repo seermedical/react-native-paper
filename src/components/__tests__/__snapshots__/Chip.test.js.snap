@@ -10,7 +10,7 @@ exports[`renders chip with close button 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "flexDirection": "row",
+      "flexDirection": "column",
     }
   }
 >
@@ -36,9 +36,14 @@ exports[`renders chip with close button 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 16,
-        },
+        Array [
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "flex": 1,
+          },
+        ],
       ]
     }
   >
@@ -73,6 +78,7 @@ exports[`renders chip with close button 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -106,12 +112,15 @@ exports[`renders chip with close button 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -177,6 +186,7 @@ exports[`renders chip with close button 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -222,7 +232,7 @@ exports[`renders chip with icon 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "flexDirection": "row",
+      "flexDirection": "column",
     }
   }
 >
@@ -248,9 +258,14 @@ exports[`renders chip with icon 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 16,
-        },
+        Array [
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "flex": 1,
+          },
+        ],
       ]
     }
   >
@@ -285,6 +300,7 @@ exports[`renders chip with icon 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -318,12 +334,15 @@ exports[`renders chip with icon 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -362,7 +381,7 @@ exports[`renders chip with onPress 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "flexDirection": "row",
+      "flexDirection": "column",
     }
   }
 >
@@ -388,9 +407,14 @@ exports[`renders chip with onPress 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 16,
-        },
+        Array [
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "flex": 1,
+          },
+        ],
       ]
     }
   >
@@ -411,12 +435,15 @@ exports[`renders chip with onPress 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -455,7 +482,7 @@ exports[`renders outlined disabled chip 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "flexDirection": "row",
+      "flexDirection": "column",
     }
   }
 >
@@ -481,9 +508,14 @@ exports[`renders outlined disabled chip 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 16,
-        },
+        Array [
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "flex": 1,
+          },
+        ],
       ]
     }
   >
@@ -504,12 +536,15 @@ exports[`renders outlined disabled chip 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -548,7 +583,7 @@ exports[`renders selected chip 1`] = `
       "borderStyle": "solid",
       "borderWidth": 0.5,
       "elevation": 0,
-      "flexDirection": "row",
+      "flexDirection": "column",
     }
   }
 >
@@ -574,9 +609,14 @@ exports[`renders selected chip 1`] = `
         Object {
           "overflow": "hidden",
         },
-        Object {
-          "borderRadius": 16,
-        },
+        Array [
+          Object {
+            "borderRadius": 16,
+          },
+          Object {
+            "flex": 1,
+          },
+        ],
       ]
     }
   >
@@ -611,6 +651,7 @@ exports[`renders selected chip 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -644,12 +685,15 @@ exports[`renders selected chip 1`] = `
       </View>
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [

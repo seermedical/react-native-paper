@@ -23,15 +23,21 @@ type Props = {
    * - `label`: optional label text
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
+   * - `labelTextColor`: custom label text color of the action item
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
+   * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
+   * - `small`: boolean describing whether small or normal sized FAB is rendered. Defaults to `true`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    */
   actions: Array<{
     icon: IconSource;
     label?: string;
     color?: string;
+    labelTextColor?: string;
     accessibilityLabel?: string;
     style?: StyleProp<ViewStyle>;
+    labelStyle?: StyleProp<ViewStyle>;
+    small?: boolean;
     onPress: () => void;
     testID?: string;
   }>;
@@ -52,6 +58,22 @@ type Props = {
    * Function to execute on pressing the `FAB`.
    */
   onPress?: () => void;
+  /**
+   * Function to execute on long pressing the `FAB`.
+   */
+  onLongPress?: () => void;
+  /**
+   * Whether to prevent opening the FAB group by default on press
+   */
+  preventStateChangeOnPress?: boolean;
+  /**
+   * Optional label for extended `FAB`.
+   */
+  label?: string;
+  /**
+   * Make the label text uppercased.
+   */
+  uppercase?: boolean;
   /**
    * Whether the speed dial is open.
    */
@@ -126,6 +148,7 @@ type Props = {
  *               icon: 'bell',
  *               label: 'Remind',
  *               onPress: () => console.log('Pressed notifications'),
+ *               small: false,
  *             },
  *           ]}
  *           onStateChange={onStateChange}
@@ -146,8 +169,12 @@ type Props = {
 const FABGroup = ({
   actions,
   icon,
+  label,
   open,
   onPress,
+  onLongPress,
+  preventStateChangeOnPress,
+  uppercase,
   accessibilityLabel,
   theme,
   style,
@@ -270,38 +297,50 @@ const FABGroup = ({
           {actions.map((it, i) => (
             <View
               key={i} // eslint-disable-line react/no-array-index-key
-              style={styles.item}
+              style={[
+                styles.item,
+                {
+                  marginHorizontal:
+                    typeof it.small === 'undefined' || it.small ? 24 : 16,
+                },
+              ]}
               pointerEvents={open ? 'box-none' : 'none'}
             >
               {it.label && (
-                <Card
-                  style={
-                    [
-                      styles.label,
-                      {
-                        transform: [{ scale: scales[i] }],
-                        opacity: opacities[i],
-                      },
-                    ] as StyleProp<ViewStyle>
-                  }
-                  onPress={() => {
-                    it.onPress();
-                    close();
-                  }}
-                  accessibilityLabel={
-                    it.accessibilityLabel !== 'undefined'
-                      ? it.accessibilityLabel
-                      : it.label
-                  }
-                  accessibilityTraits="button"
-                  accessibilityComponentType="button"
-                  accessibilityRole="button"
-                >
-                  <Text style={{ color: labelColor }}>{it.label}</Text>
-                </Card>
+                <View>
+                  <Card
+                    style={
+                      [
+                        styles.label,
+                        {
+                          transform: [{ scale: scales[i] }],
+                          opacity: opacities[i],
+                        },
+                        it.labelStyle,
+                      ] as StyleProp<ViewStyle>
+                    }
+                    onPress={() => {
+                      it.onPress();
+                      close();
+                    }}
+                    accessibilityLabel={
+                      it.accessibilityLabel !== 'undefined'
+                        ? it.accessibilityLabel
+                        : it.label
+                    }
+                    // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
+                    accessibilityTraits="button"
+                    accessibilityComponentType="button"
+                    accessibilityRole="button"
+                  >
+                    <Text style={{ color: it.labelTextColor ?? labelColor }}>
+                      {it.label}
+                    </Text>
+                  </Card>
+                </View>
               )}
               <FAB
-                small
+                small={typeof it.small !== 'undefined' ? it.small : true}
                 icon={it.icon}
                 color={it.color}
                 style={
@@ -323,6 +362,7 @@ const FABGroup = ({
                     ? it.accessibilityLabel
                     : it.label
                 }
+                // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
                 accessibilityTraits="button"
                 accessibilityComponentType="button"
                 accessibilityRole="button"
@@ -333,18 +373,22 @@ const FABGroup = ({
           ))}
         </View>
         <FAB
+          label={label}
           onPress={() => {
             onPress?.();
-            toggle();
+            preventStateChangeOnPress || toggle();
           }}
+          onLongPress={() => onLongPress?.()}
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}
+          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits="button"
           accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityState={{ expanded: open }}
           style={[styles.fab, fabStyle]}
+          uppercase={uppercase}
           visible={visible}
           testID={testID}
         />
@@ -358,7 +402,9 @@ FABGroup.displayName = 'FAB.Group';
 export default withTheme(FABGroup);
 
 // @component-docs ignore-next-line
-export { FABGroup };
+const FABGroupWithTheme = withTheme(FABGroup);
+// @component-docs ignore-next-line
+export { FABGroupWithTheme as FABGroup };
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -385,7 +431,6 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   item: {
-    marginHorizontal: 24,
     marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'flex-end',

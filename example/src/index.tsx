@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { I18nManager, Platform, YellowBox } from 'react-native';
+import { I18nManager, Platform } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Updates } from 'expo';
 import { useKeepAwake } from 'expo-keep-awake';
+import { StatusBar } from 'expo-status-bar';
 import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
@@ -31,8 +32,6 @@ declare global {
     }
   }
 }
-
-YellowBox.ignoreWarnings(['Require cycle:']);
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
@@ -204,6 +203,7 @@ export default function PaperExample() {
                   <Drawer.Screen name="Home" component={App} />
                 </Drawer.Navigator>
               )}
+              <StatusBar style="light" />
             </NavigationContainer>
           </React.Fragment>
         </PreferencesContext.Provider>

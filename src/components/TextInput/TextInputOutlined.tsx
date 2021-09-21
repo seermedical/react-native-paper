@@ -6,6 +6,7 @@ import {
   I18nManager,
   Platform,
   TextStyle,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 import TextInputAdornment, {
@@ -61,6 +62,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       selectionColor,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       underlineColor,
+      outlineColor: customOutlineColor,
       dense,
       style,
       theme,
@@ -90,8 +92,10 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
     const {
       fontSize: fontSizeStyle,
       fontWeight,
+      lineHeight,
       height,
       backgroundColor = colors.background,
+      textAlign,
       ...viewStyle
     } = (StyleSheet.flatten(style) || {}) as TextStyle;
     const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
@@ -99,15 +103,19 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
     let inputTextColor, activeColor, outlineColor, placeholderColor, errorColor;
 
     if (disabled) {
+      const isTransparent = color(customOutlineColor).alpha() === 0;
+
       inputTextColor = activeColor = color(colors.text)
         .alpha(0.54)
         .rgb()
         .string();
-      placeholderColor = outlineColor = colors.disabled;
+      placeholderColor = colors.disabled;
+      outlineColor = isTransparent ? customOutlineColor : colors.disabled;
     } else {
       inputTextColor = colors.text;
       activeColor = error ? colors.error : colors.primary;
-      placeholderColor = outlineColor = colors.placeholder;
+      placeholderColor = colors.placeholder;
+      outlineColor = customOutlineColor || colors.placeholder;
       errorColor = colors.error;
     }
 
@@ -163,6 +171,7 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       dense: dense ? dense : null,
       topPosition,
       fontSize,
+      lineHeight,
       label,
       scale: fontScale,
       isAndroid: Platform.OS === 'android',
@@ -201,9 +210,10 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
       hasActiveOutline,
       activeColor,
       placeholderColor,
-      backgroundColor,
+      backgroundColor: backgroundColor as ColorValue,
       errorColor,
       labelTranslationXOffset,
+      roundness: theme.roundness,
     };
 
     const minHeight = (height ||
@@ -289,11 +299,13 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
             backgroundColor={backgroundColor}
           />
           <View
-            style={{
-              paddingTop: LABEL_PADDING_TOP,
-              paddingBottom: 0,
-              minHeight,
-            }}
+            style={[
+              styles.labelContainer,
+              {
+                paddingTop: LABEL_PADDING_TOP,
+                minHeight,
+              },
+            ]}
           >
             <InputLabel
               parentState={parentState}
@@ -329,7 +341,13 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
                   fontWeight,
                   color: inputTextColor,
                   textAlignVertical: multiline ? 'top' : 'center',
+                  textAlign: textAlign
+                    ? textAlign
+                    : I18nManager.isRTL
+                    ? 'right'
+                    : 'left',
                 },
+                Platform.OS === 'web' && { outline: 'none' },
                 adornmentStyleAdjustmentForNativeInput,
               ],
             } as RenderProps)}
@@ -343,11 +361,11 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
 
 export default TextInputOutlined;
 
-type OutlineType = {
+type OutlineProps = {
   activeColor: string;
-  hasActiveOutline: boolean | undefined;
-  outlineColor: string | undefined;
-  backgroundColor: string | undefined;
+  hasActiveOutline?: boolean;
+  outlineColor?: string;
+  backgroundColor: ColorValue;
   theme: ReactNativePaper.Theme;
 };
 
@@ -357,7 +375,7 @@ const Outline = ({
   activeColor,
   outlineColor,
   backgroundColor,
-}: OutlineType) => (
+}: OutlineProps) => (
   <View
     pointerEvents="none"
     style={[
@@ -386,11 +404,13 @@ const styles = StyleSheet.create({
     top: 6,
     bottom: 0,
   },
+  labelContainer: {
+    paddingBottom: 0,
+  },
   input: {
     flexGrow: 1,
     paddingHorizontal: INPUT_PADDING_HORIZONTAL,
     margin: 0,
-    textAlign: I18nManager.isRTL ? 'right' : 'left',
     zIndex: 1,
   },
   inputOutlined: {

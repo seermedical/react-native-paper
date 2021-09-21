@@ -92,6 +92,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -210,6 +211,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
+          selectable={false}
           style={
             Array [
               Object {
@@ -374,12 +376,12 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               style={
                 Array [
                   Object {
-                    "height": 21,
                     "resizeMode": "contain",
-                    "width": 21,
                   },
                   Object {
+                    "height": 21,
                     "tintColor": "#ffffff",
+                    "width": 21,
                   },
                 ]
               }
@@ -421,6 +423,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       accessibilityRole="header"
       accessibilityTraits="header"
       accessible={true}
+      allowFontScaling={false}
       numberOfLines={1}
       style={
         Array [
@@ -428,6 +431,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "color": "#000000",
             "fontFamily": "System",
             "fontWeight": "400",
+          },
+          Object {
             "textAlign": "left",
           },
           Array [
@@ -531,6 +536,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {

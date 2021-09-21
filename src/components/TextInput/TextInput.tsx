@@ -61,11 +61,15 @@ export type TextInputProps = React.ComponentPropsWithRef<
    */
   underlineColor?: string;
   /**
+   * Outline color of the input.
+   */
+  outlineColor?: string;
+  /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
    * For `TextInput` in `outlined` mode
    * height is `56dp` or in dense layout - `40dp` regardless of label.
-   * When you apply `heigh` prop in style the `dense` prop affects only `paddingVertical` inside `TextInput`
+   * When you apply `height` prop in style the `dense` prop affects only `paddingVertical` inside `TextInput`
    */
   dense?: boolean;
   /**
@@ -163,7 +167,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
  * export default MyComponent;
  * ```
  *
- * @extends TextInput props https://facebook.github.io/react-native/docs/textinput.html#props
+ * @extends TextInput props https://reactnative.dev/docs/textinput#props
  */
 
 class TextInput extends React.Component<TextInputProps, State> {
@@ -275,14 +279,13 @@ class TextInput extends React.Component<TextInputProps, State> {
 
     // Set the placeholder in a delay to offset the label animation
     // If we show it immediately, they'll overlap and look ugly
-    // @ts-ignore
-    this.timer = setTimeout(
+    this.timer = (setTimeout(
       () =>
         this.setState({
           placeholder: this.props.placeholder,
         }),
       50
-    );
+    ) as unknown) as NodeJS.Timeout;
   };
 
   private hidePlaceholder = () =>
@@ -290,7 +293,7 @@ class TextInput extends React.Component<TextInputProps, State> {
       placeholder: '',
     });
 
-  private timer?: number;
+  private timer?: NodeJS.Timeout;
   private root: NativeTextInput | undefined | null;
 
   private showError = () => {
@@ -303,7 +306,7 @@ class TextInput extends React.Component<TextInputProps, State> {
         ios: false,
         default: true,
       }),
-    }).start(this.hidePlaceholder);
+    }).start();
   };
 
   private hideError = () => {
@@ -376,7 +379,7 @@ class TextInput extends React.Component<TextInputProps, State> {
   };
 
   private handleBlur = (args: Object) => {
-    if (this.props.disabled || !this.props.editable) {
+    if (!this.props.editable) {
       return;
     }
 

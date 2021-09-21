@@ -146,7 +146,7 @@ const ActivityIndicator = ({
   const containerStyle = {
     width: size,
     height: size / 2,
-    overflow: 'hidden',
+    overflow: 'hidden' as const,
   };
 
   return (
@@ -155,6 +155,7 @@ const ActivityIndicator = ({
       {...rest}
       accessible
       accessibilityRole="progressbar"
+      accessibilityState={{ busy: animating }}
     >
       <Animated.View
         style={[{ width: size, height: size, opacity: fade }]}

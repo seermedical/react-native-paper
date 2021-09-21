@@ -46,12 +46,15 @@ exports[`renders list item with custom description 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -90,7 +93,7 @@ exports[`renders list item with custom description 1`] = `
                 "borderStyle": "solid",
                 "borderWidth": 0.5,
                 "elevation": 0,
-                "flexDirection": "row",
+                "flexDirection": "column",
               }
             }
           >
@@ -116,9 +119,14 @@ exports[`renders list item with custom description 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
-                  Object {
-                    "borderRadius": 16,
-                  },
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                    },
+                    Object {
+                      "flex": 1,
+                    },
+                  ],
                 ]
               }
             >
@@ -153,6 +161,7 @@ exports[`renders list item with custom description 1`] = `
                     allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
+                    selectable={false}
                     style={
                       Array [
                         Object {
@@ -186,12 +195,15 @@ exports[`renders list item with custom description 1`] = `
                 </View>
                 <Text
                   numberOfLines={1}
+                  selectable={false}
                   style={
                     Array [
                       Object {
                         "color": "#000000",
                         "fontFamily": "System",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -271,12 +283,15 @@ exports[`renders list item with custom title and description styles 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -297,12 +312,15 @@ exports[`renders list item with custom title and description styles 1`] = `
       </Text>
       <Text
         numberOfLines={2}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -375,12 +393,15 @@ exports[`renders list item with left and right items 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -399,12 +420,15 @@ exports[`renders list item with left and right items 1`] = `
       </Text>
       <Text
         numberOfLines={2}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -444,6 +468,7 @@ exports[`renders list item with left and right items 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -533,6 +558,7 @@ exports[`renders list item with left item 1`] = `
         allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
@@ -580,12 +606,15 @@ exports[`renders list item with left item 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -653,12 +682,15 @@ exports[`renders list item with right item 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -729,12 +761,15 @@ exports[`renders list item with title and description 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -753,12 +788,15 @@ exports[`renders list item with title and description 1`] = `
       </Text>
       <Text
         numberOfLines={2}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -826,12 +864,15 @@ exports[`renders with a description with typeof number 1`] = `
     >
       <Text
         numberOfLines={1}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [
@@ -852,12 +893,15 @@ exports[`renders with a description with typeof number 1`] = `
       </Text>
       <Text
         numberOfLines={2}
+        selectable={false}
         style={
           Array [
             Object {
               "color": "#000000",
               "fontFamily": "System",
               "fontWeight": "400",
+            },
+            Object {
               "textAlign": "left",
             },
             Array [

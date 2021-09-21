@@ -11,10 +11,10 @@ import {
   Appbar,
   Divider,
   Button,
-  useTheme,
   List,
   TouchableRipple,
 } from 'react-native-paper';
+import ScreenWrapper from '../ScreenWrapper';
 
 type ContextualMenuCoord = { x: number; y: number };
 
@@ -48,13 +48,11 @@ const MenuExample = ({ navigation }: Props) => {
     setVisible({ menu3: true });
   };
 
-  const {
-    colors: { background },
-  } = useTheme();
-
-  navigation.setOptions({
-    headerShown: false,
-  });
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.screen}>
@@ -80,7 +78,7 @@ const MenuExample = ({ navigation }: Props) => {
           <Menu.Item onPress={() => {}} title="Paste" />
         </Menu>
       </Appbar.Header>
-      <View style={[styles.container, { backgroundColor: background }]}>
+      <ScreenWrapper style={styles.container}>
         <View style={styles.alignCenter}>
           <Menu
             visible={_getVisible('menu2')}
@@ -127,7 +125,7 @@ const MenuExample = ({ navigation }: Props) => {
             />
           </TouchableRipple>
         </List.Section>
-      </View>
+      </ScreenWrapper>
     </View>
   );
 };
@@ -139,7 +137,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    flex: 1,
     paddingTop: 48,
   },
   list: {
