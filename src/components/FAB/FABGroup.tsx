@@ -378,7 +378,7 @@ const FABGroup = ({
             onPress?.();
             preventStateChangeOnPress || toggle();
           }}
-          onLongPress={() => onLongPress?.()}
+          onLongPress={onLongPress}
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}

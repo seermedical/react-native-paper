@@ -47,7 +47,7 @@ class Portal extends React.Component<Props> {
   static Host = PortalHost;
 
   render() {
-    const { children, isFocused, theme } = this.props;
+    const { children, isFocused = false, theme } = this.props;
 
     return (
       <SettingsConsumer>
@@ -56,7 +56,7 @@ class Portal extends React.Component<Props> {
             {(manager) => (
               <PortalConsumer
                 manager={manager as PortalMethods}
-                isFocused={isFocused ?? false}
+                isFocused={isFocused}
               >
                 <SettingsProvider value={settings}>
                   <ThemeProvider theme={theme}>{children}</ThemeProvider>
