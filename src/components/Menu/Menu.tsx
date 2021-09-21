@@ -536,7 +536,7 @@ class Menu extends React.Component<Props, State> {
       >
         {this.isCoordinate(anchor) ? null : anchor}
         {rendered ? (
-          <Portal>
+          <Portal isFocused={visible}>
             <TouchableWithoutFeedback
               accessibilityLabel={overlayAccessibilityLabel}
               accessibilityRole="button"

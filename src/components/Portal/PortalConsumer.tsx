@@ -23,11 +23,15 @@ export default class PortalConsumer extends React.Component<Props> {
   componentDidUpdate() {
     this.checkManager();
 
-    this.props.manager.update(
-      this.key,
-      this.props.children,
-      this.props.isFocused
-    );
+    // Because of the delay in componentDidMount, componentDidUpdate
+    // can run before a key is set causing corrupt data in the manager.
+    if (this.key) {
+      this.props.manager.update(
+        this.key,
+        this.props.children,
+        this.props.isFocused
+      );
+    }
   }
 
   componentWillUnmount() {
