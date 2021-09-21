@@ -61,11 +61,15 @@ export type TextInputProps = React.ComponentPropsWithRef<
    */
   underlineColor?: string;
   /**
+   * Outline color of the input.
+   */
+  outlineColor?: string;
+  /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
    * For `TextInput` in `outlined` mode
    * height is `56dp` or in dense layout - `40dp` regardless of label.
-   * When you apply `heigh` prop in style the `dense` prop affects only `paddingVertical` inside `TextInput`
+   * When you apply `height` prop in style the `dense` prop affects only `paddingVertical` inside `TextInput`
    */
   dense?: boolean;
   /**

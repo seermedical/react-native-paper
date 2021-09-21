@@ -152,6 +152,9 @@ const Button = ({
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(mode === 'contained' ? 2 : 0)
   );
+  React.useEffect(() => {
+    elevation.setValue(mode === 'contained' ? 2 : 0);
+  }, [mode, elevation]);
 
   const handlePressIn = () => {
     if (mode === 'contained') {

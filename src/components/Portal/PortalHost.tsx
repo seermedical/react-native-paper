@@ -75,7 +75,6 @@ export default class PortalHost extends React.Component<Props, State> {
   state: State = { portalVisibility: {} };
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
-    console.log('Should it update?');
     return (
       this.props !== nextProps ||
       Object.values(this.state.portalVisibility).some(Boolean) !==
