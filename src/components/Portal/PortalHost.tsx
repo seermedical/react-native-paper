@@ -9,19 +9,24 @@ type State = {
   portalVisibility: { [key in number]: boolean };
 };
 
-type Operation = { isFocused?: boolean } & (
+type Operation =
   | {
       type: 'mount';
       key: number;
       children: React.ReactNode;
+      isFocused: boolean;
     }
   | {
       type: 'update';
       key: number;
       children: React.ReactNode;
+      isFocused: boolean;
     }
-  | { type: 'unmount'; key: number }
-);
+  | {
+      type: 'unmount';
+      key: number;
+      isFocused?: undefined;
+    };
 
 export type PortalMethods = {
   mount: (children: React.ReactNode, isFocused: boolean) => number;
