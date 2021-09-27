@@ -25,7 +25,7 @@ export default class PortalConsumer extends React.Component<Props> {
 
     // Because of the delay in componentDidMount, componentDidUpdate
     // can run before a key is set causing corrupt data in the manager.
-    if (this.key) {
+    if (this.key !== undefined) {
       this.props.manager.update(
         this.key,
         this.props.children,
