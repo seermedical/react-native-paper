@@ -76,6 +76,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   textStyle?: any;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style of chip's text wrapper
+   */
+  textWrapperStyle?: StyleProp<ViewStyle>;
 
   /**
    * @optional
@@ -130,6 +134,7 @@ const Chip = ({
   onLongPress,
   onClose,
   textStyle,
+  textWrapperStyle,
   style,
   theme,
   testID,
@@ -257,7 +262,13 @@ const Chip = ({
         accessibilityState={accessibilityState}
         testID={testID}
       >
-        <View style={[styles.content, { paddingRight: onClose ? 32 : 4 }]}>
+        <View
+          style={[
+            styles.content,
+            { paddingRight: onClose ? 32 : 4 },
+            textWrapperStyle,
+          ]}
+        >
           {avatar && !icon ? (
             <View style={[styles.avatarWrapper, disabled && { opacity: 0.26 }]}>
               {React.isValidElement(avatar)
