@@ -59,6 +59,7 @@ exports[`renders chip with close button 1`] = `
           Object {
             "paddingRight": 32,
           },
+          undefined,
         ]
       }
     >
@@ -281,6 +282,7 @@ exports[`renders chip with icon 1`] = `
           Object {
             "paddingRight": 4,
           },
+          undefined,
         ]
       }
     >
@@ -430,6 +432,7 @@ exports[`renders chip with onPress 1`] = `
           Object {
             "paddingRight": 4,
           },
+          undefined,
         ]
       }
     >
@@ -531,6 +534,7 @@ exports[`renders outlined disabled chip 1`] = `
           Object {
             "paddingRight": 4,
           },
+          undefined,
         ]
       }
     >
@@ -632,6 +636,7 @@ exports[`renders selected chip 1`] = `
           Object {
             "paddingRight": 4,
           },
+          undefined,
         ]
       }
     >
