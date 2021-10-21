@@ -135,6 +135,7 @@ const Chip = ({
   onClose,
   textStyle,
   textWrapperStyle,
+  hitSlop,
   style,
   theme,
   testID,
@@ -252,6 +253,7 @@ const Chip = ({
         onLongPress={onLongPress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
+        hitSlop={hitSlop}
         underlayColor={underlayColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
