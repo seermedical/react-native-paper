@@ -78,6 +78,8 @@ const TextInputExample = () => {
     maxLengthName,
     flatTextSecureEntry,
     outlineTextSecureEntry,
+    flatMultilineCustomHeightNoLabel,
+    flatMultilineCustomHeightNoLabelTop,
     iconsColor: {
       flatLeftIcon,
       flatRightIcon,
@@ -442,6 +444,30 @@ const TextInputExample = () => {
               roundness: 25,
             }}
             label="Custom rounded input"
+          />
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            style={[styles.inputContainerStyle, { height: 150 }]}
+            multiline
+            placeholder="Custom height, no label"
+            value={flatMultilineCustomHeightNoLabel}
+            onChangeText={(flatMultilineCustomHeightNoLabel) =>
+              inputActionHandler(
+                'flatMultilineCustomHeightNoLabel',
+                flatMultilineCustomHeightNoLabel
+              )
+            }
+          />
+          <TextInput
+            style={[styles.inputContainerStyle, { height: 150 }]}
+            multiline
+            placeholder="Custom height, no label, textAlignVertical to top"
+            textAlignVertical="top"
+            value={flatMultilineCustomHeightNoLabelTop}
+            onChangeText={(flatMultilineCustomHeightNoLabelTop) =>
+              inputActionHandler('flatMultilineCustomHeightNoLabelTop', flatMultilineCustomHeightNoLabelTop)
+            }
           />
         </View>
       </ScreenWrapper>

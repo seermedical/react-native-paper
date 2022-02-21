@@ -33,6 +33,8 @@ export type State = {
   flatTextSecureEntry: boolean;
   outlineTextSecureEntry: boolean;
   iconsColor: IconsColor;
+  flatMultilineCustomHeightNoLabel: string;
+  flatMultilineCustomHeightNoLabelTop: string;
 };
 
 export function inputReducer<T extends keyof State>(
