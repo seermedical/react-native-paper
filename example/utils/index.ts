@@ -35,6 +35,8 @@ export type State = {
   iconsColor: IconsColor;
   flatMultilineCustomHeightNoLabel: string;
   flatMultilineCustomHeightNoLabelTop: string;
+  outlinedMultilineCustomHeightNoLabel: string;
+  outlinedMultilineCustomHeightNoLabelTop: string;
 };
 
 export function inputReducer<T extends keyof State>(

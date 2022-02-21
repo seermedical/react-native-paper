@@ -28,6 +28,10 @@ const initialState: State = {
   maxLengthName: '',
   flatTextSecureEntry: true,
   outlineTextSecureEntry: true,
+  flatMultilineCustomHeightNoLabel: '',
+  flatMultilineCustomHeightNoLabelTop: '',
+  outlinedMultilineCustomHeightNoLabel: '',
+  outlinedMultilineCustomHeightNoLabelTop: '',
   iconsColor: {
     flatLeftIcon: undefined,
     flatRightIcon: undefined,
@@ -80,6 +84,8 @@ const TextInputExample = () => {
     outlineTextSecureEntry,
     flatMultilineCustomHeightNoLabel,
     flatMultilineCustomHeightNoLabelTop,
+    outlinedMultilineCustomHeightNoLabel,
+    outlinedMultilineCustomHeightNoLabelTop,
     iconsColor: {
       flatLeftIcon,
       flatRightIcon,
@@ -466,7 +472,23 @@ const TextInputExample = () => {
             textAlignVertical="top"
             value={flatMultilineCustomHeightNoLabelTop}
             onChangeText={(flatMultilineCustomHeightNoLabelTop) =>
-              inputActionHandler('flatMultilineCustomHeightNoLabelTop', flatMultilineCustomHeightNoLabelTop)
+              inputActionHandler(
+                'flatMultilineCustomHeightNoLabelTop',
+                flatMultilineCustomHeightNoLabelTop
+              )
+            }
+          />
+          <TextInput
+            mode="outlined"
+            style={[styles.inputContainerStyle, { height: 150 }]}
+            multiline
+            placeholder="Custom height, outlined, no label"
+            value={outlinedMultilineCustomHeightNoLabel}
+            onChangeText={(outlinedMultilineCustomHeightNoLabel) =>
+              inputActionHandler(
+                'outlinedMultilineCustomHeightNoLabel',
+                outlinedMultilineCustomHeightNoLabel
+              )
             }
           />
         </View>
