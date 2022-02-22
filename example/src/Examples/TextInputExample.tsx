@@ -31,7 +31,6 @@ const initialState: State = {
   flatMultilineCustomHeightNoLabel: '',
   flatMultilineCustomHeightNoLabelTop: '',
   outlinedMultilineCustomHeightNoLabel: '',
-  outlinedMultilineCustomHeightNoLabelTop: '',
   iconsColor: {
     flatLeftIcon: undefined,
     flatRightIcon: undefined,
@@ -85,7 +84,6 @@ const TextInputExample = () => {
     flatMultilineCustomHeightNoLabel,
     flatMultilineCustomHeightNoLabelTop,
     outlinedMultilineCustomHeightNoLabel,
-    outlinedMultilineCustomHeightNoLabelTop,
     iconsColor: {
       flatLeftIcon,
       flatRightIcon,
@@ -452,7 +450,6 @@ const TextInputExample = () => {
             label="Custom rounded input"
           />
         </View>
-        <View style={styles.inputContainerStyle}>
           <TextInput
             style={[styles.inputContainerStyle, { height: 150 }]}
             multiline
@@ -491,7 +488,6 @@ const TextInputExample = () => {
               )
             }
           />
-        </View>
       </ScreenWrapper>
     </TextInputAvoidingView>
   );
