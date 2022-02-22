@@ -220,6 +220,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
 
     const paddingFlat = adjustPaddingFlat({
       ...paddingSettings,
+      textAlignVertical: rest.textAlignVertical,
       pad,
     });
 

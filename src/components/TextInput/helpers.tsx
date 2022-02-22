@@ -7,6 +7,7 @@ import {
   FLAT_INPUT_OFFSET,
 } from './constants';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
+import type { TextInputProps } from './TextInput';
 
 type PaddingProps = {
   height: number | null;
@@ -24,6 +25,7 @@ type PaddingProps = {
 };
 
 type AdjProps = PaddingProps & {
+  textAlignVertical: TextInputProps['textAlignVertical'];
   pad: number;
 };
 
@@ -150,6 +152,7 @@ export const adjustPaddingFlat = ({
   dense,
   fontSize,
   isAndroid,
+  textAlignVertical,
   styles,
 }: AdjProps): Padding => {
   let result = pad;
@@ -190,7 +193,7 @@ export const adjustPaddingFlat = ({
     }
     topResult = Math.floor(topResult);
   } else {
-    if (height) {
+    if (height && (!textAlignVertical || textAlignVertical === 'center')) {
       // center text when height is passed
       return {
         paddingTop: Math.max(0, (height - fontSize) / 2),
