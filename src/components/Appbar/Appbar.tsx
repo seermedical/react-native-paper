@@ -24,6 +24,7 @@ type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
    */
   theme: ReactNativePaper.Theme;
   style?: StyleProp<ViewStyle>;
+  contentAlignment?: 'auto' | 'left' | 'center';
 };
 
 export const DEFAULT_APPBAR_HEIGHT = 56;
@@ -73,7 +74,14 @@ export const DEFAULT_APPBAR_HEIGHT = 56;
  * });
  * ```
  */
-const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
+const Appbar = ({
+  children,
+  dark,
+  style,
+  theme,
+  contentAlignment = 'auto',
+  ...rest
+}: Props) => {
   const { colors, dark: isDarkTheme, mode } = theme;
   const {
     backgroundColor: customBackground,
@@ -102,7 +110,10 @@ const Appbar = ({ children, dark, style, theme, ...rest }: Props) => {
   let shouldCenterContent = false;
   let shouldAddLeftSpacing = false;
   let shouldAddRightSpacing = false;
-  if (Platform.OS === 'ios') {
+  if (
+    (Platform.OS === 'ios' && contentAlignment === 'auto') ||
+    contentAlignment === 'center'
+  ) {
     let hasAppbarContent = false;
     let leftItemsCount = 0;
     let rightItemsCount = 0;
