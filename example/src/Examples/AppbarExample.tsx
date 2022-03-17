@@ -17,6 +17,7 @@ const AppbarExample = ({ navigation }: Props) => {
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
   const [showExactTheme, setShowExactTheme] = React.useState(false);
+  const [leftAlign, setLeftAlign] = React.useState(false);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -26,6 +27,7 @@ const AppbarExample = ({ navigation }: Props) => {
           theme={{
             mode: showExactTheme ? 'exact' : 'adaptive',
           }}
+          contentAlignment={leftAlign ? 'left' : 'center'}
         >
           {showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />
@@ -51,6 +53,7 @@ const AppbarExample = ({ navigation }: Props) => {
     showMoreIcon,
     showCustomColor,
     showExactTheme,
+    leftAlign,
   ]);
 
   return (
@@ -83,10 +86,15 @@ const AppbarExample = ({ navigation }: Props) => {
           <Paragraph>Exact Dark Theme</Paragraph>
           <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
         </View>
+        <View style={styles.row}>
+          <Paragraph>Left Align</Paragraph>
+          <Switch value={leftAlign} onValueChange={setLeftAlign} />
+        </View>
       </ScreenWrapper>
       <Appbar
         style={styles.bottom}
         theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
+        contentAlignment={leftAlign ? 'left' : 'auto'}
       >
         <Appbar.Action icon="archive" onPress={() => {}} />
         <Appbar.Action icon="email" onPress={() => {}} />
