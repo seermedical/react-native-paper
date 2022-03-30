@@ -280,18 +280,20 @@ const FABGroup = ({
 
   return (
     <View pointerEvents="box-none" style={[styles.container, style]}>
-      <TouchableWithoutFeedback onPress={close}>
-        <Animated.View
-          pointerEvents={open ? 'auto' : 'none'}
-          style={[
-            styles.backdrop,
-            {
-              opacity: backdropOpacity,
-              backgroundColor: colors.backdrop,
-            },
-          ]}
-        />
-      </TouchableWithoutFeedback>
+      {open && (
+        <TouchableWithoutFeedback onPress={close}>
+          <Animated.View
+            pointerEvents={open ? 'auto' : 'none'}
+            style={[
+              styles.backdrop,
+              {
+                opacity: backdropOpacity,
+                backgroundColor: colors.backdrop,
+              },
+            ]}
+          />
+        </TouchableWithoutFeedback>
+      )}
       <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
         <View pointerEvents={open ? 'box-none' : 'none'}>
           {actions.map((it, i) => (
