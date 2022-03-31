@@ -141,9 +141,11 @@ const FAB = ({
     new Animated.Value(visible ? 1 : 0)
   );
   const { scale } = theme.animation;
+  const [showFAB, setShowFAB] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     if (visible) {
+      setShowFAB(true);
       Animated.timing(visibility, {
         toValue: 1,
         duration: 200 * scale,
@@ -154,7 +156,7 @@ const FAB = ({
         toValue: 0,
         duration: 150 * scale,
         useNativeDriver: true,
-      }).start();
+      }).start(() => setShowFAB(false));
     }
   }, [visible, scale, visibility]);
 
@@ -188,7 +190,7 @@ const FAB = ({
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
 
-  return (
+  return showFAB ? (
     <Surface
       {...rest}
       style={
@@ -252,6 +254,8 @@ const FAB = ({
         </View>
       </TouchableRipple>
     </Surface>
+  ) : (
+    <></>
   );
 };
 
