@@ -11,7 +11,10 @@ import {
 import color from 'color';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
+type Props = Omit<
+  React.ComponentProps<typeof TouchableWithoutFeedback>,
+  'hasTVPreferredFocus' | 'tvParallaxProperties'
+> & {
   /**
    * Whether to render the ripple outside the view bounds.
    */
