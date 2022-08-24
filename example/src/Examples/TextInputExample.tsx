@@ -31,6 +31,7 @@ const initialState: State = {
   flatMultilineCustomHeightNoLabel: '',
   flatMultilineCustomHeightNoLabelTop: '',
   outlinedMultilineCustomHeightNoLabel: '',
+  outlinedMultilineCustomHeightNoLabelTop: '',
   iconsColor: {
     flatLeftIcon: undefined,
     flatRightIcon: undefined,
@@ -450,44 +451,44 @@ const TextInputExample = () => {
             label="Custom rounded input"
           />
         </View>
-          <TextInput
-            style={[styles.inputContainerStyle, { height: 150 }]}
-            multiline
-            placeholder="Custom height, no label"
-            value={flatMultilineCustomHeightNoLabel}
-            onChangeText={(flatMultilineCustomHeightNoLabel) =>
-              inputActionHandler(
-                'flatMultilineCustomHeightNoLabel',
-                flatMultilineCustomHeightNoLabel
-              )
-            }
-          />
-          <TextInput
-            style={[styles.inputContainerStyle, { height: 150 }]}
-            multiline
-            placeholder="Custom height, no label, textAlignVertical to top"
-            textAlignVertical="top"
-            value={flatMultilineCustomHeightNoLabelTop}
-            onChangeText={(flatMultilineCustomHeightNoLabelTop) =>
-              inputActionHandler(
-                'flatMultilineCustomHeightNoLabelTop',
-                flatMultilineCustomHeightNoLabelTop
-              )
-            }
-          />
-          <TextInput
-            mode="outlined"
-            style={[styles.inputContainerStyle, { height: 150 }]}
-            multiline
-            placeholder="Custom height, outlined, no label"
-            value={outlinedMultilineCustomHeightNoLabel}
-            onChangeText={(outlinedMultilineCustomHeightNoLabel) =>
-              inputActionHandler(
-                'outlinedMultilineCustomHeightNoLabel',
-                outlinedMultilineCustomHeightNoLabel
-              )
-            }
-          />
+        <TextInput
+          style={[styles.inputContainerStyle, { height: 150 }]}
+          multiline
+          placeholder="Custom height, no label"
+          value={flatMultilineCustomHeightNoLabel}
+          onChangeText={(flatMultilineCustomHeightNoLabel) =>
+            inputActionHandler(
+              'flatMultilineCustomHeightNoLabel',
+              flatMultilineCustomHeightNoLabel
+            )
+          }
+        />
+        <TextInput
+          style={[styles.inputContainerStyle, { height: 150 }]}
+          multiline
+          placeholder="Custom height, no label, textAlignVertical to top"
+          textAlignVertical="top"
+          value={flatMultilineCustomHeightNoLabelTop}
+          onChangeText={(flatMultilineCustomHeightNoLabelTop) =>
+            inputActionHandler(
+              'flatMultilineCustomHeightNoLabelTop',
+              flatMultilineCustomHeightNoLabelTop
+            )
+          }
+        />
+        <TextInput
+          mode="outlined"
+          style={[styles.inputContainerStyle, { height: 150 }]}
+          multiline
+          placeholder="Custom height, outlined, no label"
+          value={outlinedMultilineCustomHeightNoLabel}
+          onChangeText={(outlinedMultilineCustomHeightNoLabel) =>
+            inputActionHandler(
+              'outlinedMultilineCustomHeightNoLabel',
+              outlinedMultilineCustomHeightNoLabel
+            )
+          }
+        />
       </ScreenWrapper>
     </TextInputAvoidingView>
   );

@@ -18,8 +18,9 @@ import type { $Omit } from '../../types';
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
 
-export type TextInputProps = React.ComponentPropsWithRef<
-  typeof NativeTextInput
+export type TextInputProps = Omit<
+  React.ComponentPropsWithRef<typeof NativeTextInput>,
+  'autoCompleteType'
 > & {
   /**
    * Mode of the TextInput.

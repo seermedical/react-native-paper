@@ -6,7 +6,10 @@ import type { $Omit } from '../../../../src/types';
 import type { IconSource } from '../../Icon';
 
 type Props = $Omit<
-  React.ComponentProps<typeof IconButton>,
+  Omit<
+    React.ComponentProps<typeof IconButton>,
+    'centered' | 'hasTVPreferredFocus' | 'tvParallaxProperties'
+  >,
   'icon' | 'theme' | 'color'
 > & {
   /**
