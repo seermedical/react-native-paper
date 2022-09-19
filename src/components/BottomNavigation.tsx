@@ -9,6 +9,7 @@ import {
   Platform,
   Keyboard,
   ViewStyle,
+  ColorValue,
 } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import color from 'color';
@@ -50,7 +51,7 @@ type TouchableProps = TouchableWithoutFeedbackProps & {
   children: React.ReactNode;
   borderless?: boolean;
   centered?: boolean;
-  rippleColor?: string;
+  rippleColor?: ColorValue;
 };
 
 type Props = {
@@ -240,6 +241,7 @@ const Touchable = ({
   TouchableRipple.supported ? (
     <TouchableRipple
       {...rest}
+      disabled={rest.disabled === null ? undefined : rest.disabled}
       borderless={borderless}
       centered={centered}
       rippleColor={rippleColor}
@@ -742,12 +744,8 @@ const BottomNavigation = ({
                 onPress: () => handleTabPress(index),
                 testID: getTestID({ route }),
                 accessibilityLabel: getAccessibilityLabel({ route }),
-                accessibilityTraits: focused
-                  ? ['button', 'selected']
-                  : 'button',
-                accessibilityComponentType: 'button',
                 accessibilityRole: 'button',
-                accessibilityState: { selected: true },
+                accessibilityState: { selected: focused },
                 style: styles.item,
                 children: (
                   <View pointerEvents="none">

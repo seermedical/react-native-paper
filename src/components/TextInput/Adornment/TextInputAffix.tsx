@@ -87,7 +87,7 @@ const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
     typeof paddingHorizontal === 'number' ? paddingHorizontal : AFFIX_OFFSET;
 
   const style = {
-    top: topPosition,
+    top: topPosition || undefined,
     [side]: offset,
   };
 

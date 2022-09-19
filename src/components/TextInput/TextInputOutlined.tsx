@@ -6,6 +6,7 @@ import {
   I18nManager,
   Platform,
   TextStyle,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 import TextInputAdornment, {
@@ -350,10 +351,10 @@ class TextInputOutlined extends React.Component<ChildTextInputProps> {
 export default TextInputOutlined;
 
 type OutlineType = {
-  activeColor: string;
+  activeColor: ColorValue;
   hasActiveOutline: boolean | undefined;
-  outlineColor: string | undefined;
-  backgroundColor: string | undefined;
+  outlineColor: ColorValue | undefined;
+  backgroundColor: ColorValue | undefined;
   theme: ReactNativePaper.Theme;
 };
 

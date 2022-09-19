@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   GestureResponderEvent,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
@@ -39,11 +40,11 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
   /**
    * Color of the ripple effect (Android >= 5.0 and Web).
    */
-  rippleColor?: string;
+  rippleColor?: ColorValue;
   /**
    * Color of the underlay for the highlight effect (Android < 5.0 and iOS).
    */
-  underlayColor?: string;
+  underlayColor?: ColorValue;
   /**
    * Content of the `TouchableRipple`.
    */

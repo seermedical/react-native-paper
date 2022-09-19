@@ -293,8 +293,6 @@ const FABGroup = ({
                       ? it.accessibilityLabel
                       : it.label
                   }
-                  accessibilityTraits="button"
-                  accessibilityComponentType="button"
                   accessibilityRole="button"
                 >
                   <Text style={{ color: labelColor }}>{it.label}</Text>
@@ -323,8 +321,6 @@ const FABGroup = ({
                     ? it.accessibilityLabel
                     : it.label
                 }
-                accessibilityTraits="button"
-                accessibilityComponentType="button"
                 accessibilityRole="button"
                 testID={it.testID}
                 visible={open}
@@ -340,8 +336,6 @@ const FABGroup = ({
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}
-          accessibilityTraits="button"
-          accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityState={{ expanded: open }}
           style={[styles.fab, fabStyle]}

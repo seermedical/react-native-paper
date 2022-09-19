@@ -43,7 +43,7 @@ const LabelBackground = ({
             StyleSheet.absoluteFill,
             styles.view,
             {
-              backgroundColor,
+              backgroundColor: backgroundColor || undefined,
               opacity,
             },
             labelTranslationX,

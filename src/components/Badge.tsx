@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 import color from 'color';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
@@ -86,7 +92,7 @@ const Badge = ({
   }, [visible, opacity, scale]);
 
   const { backgroundColor = theme.colors.notification, ...restStyle } =
-    StyleSheet.flatten(style) || {};
+    (StyleSheet.flatten(style) as ViewStyle) || {};
   const textColor = color(backgroundColor).isLight() ? black : white;
 
   const borderRadius = size / 2;
