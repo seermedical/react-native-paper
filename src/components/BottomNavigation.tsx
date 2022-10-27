@@ -10,6 +10,7 @@ import {
   Keyboard,
   ViewStyle,
   ColorValue,
+  EmitterSubscription,
 } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import color from 'color';
@@ -472,22 +473,21 @@ const BottomNavigation = ({
   }, []);
 
   React.useEffect(() => {
+    let listeners: EmitterSubscription[];
     if (Platform.OS === 'ios') {
-      Keyboard.addListener('keyboardWillShow', handleKeyboardShow);
-      Keyboard.addListener('keyboardWillHide', handleKeyboardHide);
+      listeners = [
+        Keyboard.addListener('keyboardWillShow', handleKeyboardShow),
+        Keyboard.addListener('keyboardWillHide', handleKeyboardHide),
+      ];
     } else {
-      Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
-      Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
+      listeners = [
+        Keyboard.addListener('keyboardDidShow', handleKeyboardShow),
+        Keyboard.addListener('keyboardDidHide', handleKeyboardHide),
+      ];
     }
 
     return () => {
-      if (Platform.OS === 'ios') {
-        Keyboard.removeListener('keyboardWillShow', handleKeyboardShow);
-        Keyboard.removeListener('keyboardWillHide', handleKeyboardHide);
-      } else {
-        Keyboard.removeListener('keyboardDidShow', handleKeyboardShow);
-        Keyboard.removeListener('keyboardDidHide', handleKeyboardHide);
-      }
+      listeners.forEach((listener) => listener.remove());
     };
   }, [handleKeyboardHide, handleKeyboardShow]);
 
