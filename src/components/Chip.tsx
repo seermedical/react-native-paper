@@ -5,6 +5,7 @@ import {
   Platform,
   StyleProp,
   StyleSheet,
+  TextStyle,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
@@ -20,7 +21,7 @@ import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
 import type { EllipsizeProp } from '../types';
 
-type Props = React.ComponentProps<typeof Surface> & {
+export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the chip.
    * - `flat` - flat chip without outline.
@@ -39,6 +40,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    * Avatar to display for the `Chip`. Both icon and avatar cannot be specified.
    */
   avatar?: React.ReactNode;
+  /**
+   * Icon to display as the close button for the `Chip`. The icon appears only when the onClose prop is specified.
+   */
+  closeIcon?: IconSource;
   /**
    * Whether chip is selected.
    */
@@ -74,12 +79,8 @@ type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Style of chip's text
    */
-  textStyle?: any;
+  textStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
-  /**
-   * Style of chip's text wrapper
-   */
-  textWrapperStyle?: StyleProp<ViewStyle>;
 
   /**
    * @optional
@@ -133,9 +134,8 @@ const Chip = ({
   onPress,
   onLongPress,
   onClose,
+  closeIcon,
   textStyle,
-  textWrapperStyle,
-  hitSlop,
   style,
   theme,
   testID,
@@ -169,10 +169,8 @@ const Chip = ({
   const defaultBackgroundColor =
     mode === 'outlined' ? colors.surface : dark ? '#383838' : '#ebebeb';
 
-  const {
-    backgroundColor = defaultBackgroundColor,
-    borderRadius = 16,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const { backgroundColor = defaultBackgroundColor, borderRadius = 16 } =
+    (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   const borderColor =
     mode === 'outlined'
@@ -202,9 +200,10 @@ const Chip = ({
     typeof backgroundColor === 'string'
       ? backgroundColor
       : defaultBackgroundColor;
-  const selectedBackgroundColor = (dark
-    ? color(backgroundColorString).lighten(mode === 'outlined' ? 0.2 : 0.4)
-    : color(backgroundColorString).darken(mode === 'outlined' ? 0.08 : 0.2)
+  const selectedBackgroundColor = (
+    dark
+      ? color(backgroundColorString).lighten(mode === 'outlined' ? 0.2 : 0.4)
+      : color(backgroundColorString).darken(mode === 'outlined' ? 0.08 : 0.2)
   )
     .rgb()
     .string();
@@ -253,7 +252,6 @@ const Chip = ({
         onLongPress={onLongPress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
-        hitSlop={hitSlop}
         underlayColor={underlayColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
@@ -264,13 +262,7 @@ const Chip = ({
         accessibilityState={accessibilityState}
         testID={testID}
       >
-        <View
-          style={[
-            styles.content,
-            { paddingRight: onClose ? 32 : 4 },
-            textWrapperStyle,
-          ]}
-        >
+        <View style={[styles.content, { paddingRight: onClose ? 32 : 4 }]}>
           {avatar && !icon ? (
             <View style={[styles.avatarWrapper, disabled && { opacity: 0.26 }]}>
               {React.isValidElement(avatar)
@@ -333,12 +325,16 @@ const Chip = ({
             accessibilityLabel={closeIconAccessibilityLabel}
           >
             <View style={[styles.icon, styles.closeIcon]}>
-              <MaterialCommunityIcon
-                name="close-circle"
-                size={16}
-                color={iconColor}
-                direction="ltr"
-              />
+              {closeIcon ? (
+                <Icon source={closeIcon} color={iconColor} size={16} />
+              ) : (
+                <MaterialCommunityIcon
+                  name="close-circle"
+                  size={16}
+                  color={iconColor}
+                  direction="ltr"
+                />
+              )}
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -358,6 +354,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 4,
     position: 'relative',
+    flexGrow: 1,
   },
   icon: {
     padding: 4,
@@ -394,7 +391,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   touchable: {
-    flex: 1,
+    flexGrow: 1,
   },
 });
 

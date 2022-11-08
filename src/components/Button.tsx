@@ -6,7 +6,6 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
-  TextProps,
 } from 'react-native';
 import color from 'color';
 
@@ -18,7 +17,7 @@ import TouchableRipple from './TouchableRipple/TouchableRipple';
 import { black, white } from '../styles/colors';
 import { withTheme } from '../core/theming';
 
-type Props = React.ComponentProps<typeof Surface> & {
+export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
    * - `text` - flat button without background or outline (low emphasis)
@@ -63,6 +62,10 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   accessibilityLabel?: string;
   /**
+   * Accessibility hint for the button. This is read by the screen reader when the user taps the button.
+   */
+  accessibilityHint?: string;
+  /**
    * Function to execute on press.
    */
   onPress?: () => void;
@@ -80,10 +83,6 @@ type Props = React.ComponentProps<typeof Surface> & {
    * Style for the button text.
    */
   labelStyle?: StyleProp<TextStyle>;
-  /**
-   * Custom props for the button text.
-   */
-  labelProps?: TextProps;
   /**
    * @optional
    */
@@ -137,24 +136,23 @@ const Button = ({
   children,
   uppercase = true,
   accessibilityLabel,
+  accessibilityHint,
   onPress,
   onLongPress,
   style,
   theme,
   contentStyle,
-  labelProps,
-  hitSlop,
   labelStyle,
   testID,
   accessible,
   ...rest
 }: Props) => {
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(mode === 'contained' ? 2 : 0)
+    new Animated.Value(disabled || mode !== 'contained' ? 0 : 2)
   );
   React.useEffect(() => {
-    elevation.setValue(mode === 'contained' ? 2 : 0);
-  }, [mode, elevation]);
+    elevation.setValue(disabled || mode !== 'contained' ? 0 : 2);
+  }, [mode, elevation, disabled]);
 
   const handlePressIn = () => {
     if (mode === 'contained') {
@@ -245,7 +243,7 @@ const Button = ({
   };
   const touchableStyle = {
     borderRadius: style
-      ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ||
+      ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ??
         roundness
       : roundness,
   };
@@ -254,7 +252,6 @@ const Button = ({
     StyleSheet.flatten(labelStyle) || {};
 
   const textStyle = { color: textColor, ...font };
-  const elevationRes = disabled || mode !== 'contained' ? 0 : elevation;
   const iconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? styles.iconReverse
@@ -266,7 +263,7 @@ const Button = ({
       style={[
         styles.button,
         compact && styles.compact,
-        { elevation: elevationRes } as ViewStyle,
+        { elevation },
         buttonStyle,
         style,
       ]}
@@ -279,6 +276,7 @@ const Button = ({
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         accessibilityLabel={accessibilityLabel}
+        accessibilityHint={accessibilityHint}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
@@ -286,7 +284,6 @@ const Button = ({
         accessibilityState={{ disabled }}
         accessible={accessible}
         disabled={disabled}
-        hitSlop={hitSlop}
         rippleColor={rippleColor}
         style={touchableStyle}
         testID={testID}
@@ -327,7 +324,6 @@ const Button = ({
               font,
               labelStyle,
             ]}
-            {...labelProps}
           >
             {children}
           </Text>

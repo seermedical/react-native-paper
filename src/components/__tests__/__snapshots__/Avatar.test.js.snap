@@ -20,39 +20,22 @@ exports[`renders avatar with icon 1`] = `
 >
   <Text
     accessibilityElementsHidden={true}
-    allowFontScaling={false}
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     selectable={false}
     style={
       Array [
         Object {
+          "backgroundColor": "transparent",
+        },
+        Object {
           "color": "#ffffff",
           "fontSize": 38.4,
         },
-        Array [
-          Object {
-            "lineHeight": 38.4,
-            "transform": Array [
-              Object {
-                "scaleX": 1,
-              },
-            ],
-          },
-          Object {
-            "backgroundColor": "transparent",
-          },
-        ],
-        Object {
-          "fontFamily": "Material Design Icons",
-          "fontStyle": "normal",
-          "fontWeight": "normal",
-        },
-        Object {},
       ]
     }
   >
-    
+    □
   </Text>
 </View>
 `;
@@ -62,7 +45,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "#FF0000",
+        "backgroundColor": "#f44336",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -77,39 +60,22 @@ exports[`renders avatar with icon and custom background color 1`] = `
 >
   <Text
     accessibilityElementsHidden={true}
-    allowFontScaling={false}
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     selectable={false}
     style={
       Array [
         Object {
+          "backgroundColor": "transparent",
+        },
+        Object {
           "color": "#ffffff",
           "fontSize": 38.4,
         },
-        Array [
-          Object {
-            "lineHeight": 38.4,
-            "transform": Array [
-              Object {
-                "scaleX": 1,
-              },
-            ],
-          },
-          Object {
-            "backgroundColor": "transparent",
-          },
-        ],
-        Object {
-          "fontFamily": "Material Design Icons",
-          "fontStyle": "normal",
-          "fontWeight": "normal",
-        },
-        Object {},
       ]
     }
   >
-    
+    □
   </Text>
 </View>
 `;
@@ -183,7 +149,7 @@ exports[`renders avatar with text 1`] = `
           Object {
             "color": "#ffffff",
             "fontSize": 32,
-            "lineHeight": 64,
+            "lineHeight": 32,
           },
           undefined,
         ],
@@ -200,7 +166,7 @@ exports[`renders avatar with text and custom background color 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "#FF0000",
+        "backgroundColor": "#f44336",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -233,7 +199,7 @@ exports[`renders avatar with text and custom background color 1`] = `
           Object {
             "color": "#ffffff",
             "fontSize": 32,
-            "lineHeight": 64,
+            "lineHeight": 32,
           },
           undefined,
         ],
@@ -283,7 +249,7 @@ exports[`renders avatar with text and custom colors 1`] = `
           Object {
             "color": "#FFFFFF",
             "fontSize": 32,
-            "lineHeight": 64,
+            "lineHeight": 32,
           },
           undefined,
         ],
@@ -333,7 +299,7 @@ exports[`renders avatar with text and custom size 1`] = `
           Object {
             "color": "#ffffff",
             "fontSize": 48,
-            "lineHeight": 96,
+            "lineHeight": 48,
           },
           undefined,
         ],

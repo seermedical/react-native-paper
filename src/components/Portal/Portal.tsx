@@ -7,7 +7,7 @@ import {
 } from '../../core/settings';
 import { ThemeProvider, withTheme } from '../../core/theming';
 
-type Props = {
+export type Props = {
   /**
    * Content of the `Portal`.
    */
@@ -16,11 +16,6 @@ type Props = {
    * @optional
    */
   theme: ReactNativePaper.Theme;
-  /**
-   * Whether the Portal content is currently focused. This hides everything outside the portal from accessibility tools.
-   * @optional
-   */
-  isFocused?: boolean;
 };
 
 /**
@@ -47,17 +42,14 @@ class Portal extends React.Component<Props> {
   static Host = PortalHost;
 
   render() {
-    const { children, isFocused = false, theme } = this.props;
+    const { children, theme } = this.props;
 
     return (
       <SettingsConsumer>
         {(settings) => (
           <PortalContext.Consumer>
             {(manager) => (
-              <PortalConsumer
-                manager={manager as PortalMethods}
-                isFocused={isFocused}
-              >
+              <PortalConsumer manager={manager as PortalMethods}>
                 <SettingsProvider value={settings}>
                   <ThemeProvider theme={theme}>{children}</ThemeProvider>
                 </SettingsProvider>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type Props = {
+export type Props = {
   /**
    * Function to execute on selection change.
    */
@@ -20,9 +20,8 @@ type ToggleButtonContextType = {
   onValueChange: (item: string) => void | null;
 };
 
-export const ToggleButtonGroupContext = React.createContext<
-  ToggleButtonContextType
->(null as any);
+export const ToggleButtonGroupContext =
+  React.createContext<ToggleButtonContextType>(null as any);
 
 /**
  * Toggle group allows to control a group of toggle buttons.</br>

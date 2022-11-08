@@ -15,7 +15,7 @@ import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 
-type Props = {
+export type Props = {
   /**
    * Status of checkbox.
    */
@@ -96,9 +96,10 @@ const CheckboxItem = ({
   testID,
   mode,
   position = 'trailing',
+  disabled,
   ...props
 }: Props) => {
-  const checkboxProps = { ...props, status, theme };
+  const checkboxProps = { ...props, status, theme, disabled };
   const isLeading = position === 'leading';
   let checkbox;
 
@@ -111,14 +112,28 @@ const CheckboxItem = ({
   }
 
   return (
-    <TouchableRipple onPress={onPress} testID={testID}>
-      <View style={[styles.container, style]} pointerEvents="none">
+    <TouchableRipple
+      accessibilityLabel={label}
+      accessibilityRole="checkbox"
+      accessibilityState={{
+        checked: status === 'checked',
+        disabled,
+      }}
+      onPress={onPress}
+      testID={testID}
+      disabled={disabled}
+    >
+      <View
+        style={[styles.container, style]}
+        pointerEvents="none"
+        importantForAccessibility="no-hide-descendants"
+      >
         {isLeading && checkbox}
         <Text
           style={[
             styles.label,
             {
-              color: theme.colors.text,
+              color: disabled ? theme.colors.disabled : theme.colors.text,
               textAlign: isLeading ? 'right' : 'left',
             },
             labelStyle,

@@ -15,7 +15,7 @@ import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 
-type Props = {
+export type Props = {
   /**
    * Action items to display in the form of a speed dial.
    * An action item should contain the following properties:
@@ -55,25 +55,13 @@ type Props = {
    */
   color?: string;
   /**
+   * Custom backdrop color for opened speed dial background.
+   */
+  backdropColor?: string;
+  /**
    * Function to execute on pressing the `FAB`.
    */
   onPress?: () => void;
-  /**
-   * Function to execute on long pressing the `FAB`.
-   */
-  onLongPress?: () => void;
-  /**
-   * Whether to prevent opening the FAB group by default on press
-   */
-  preventStateChangeOnPress?: boolean;
-  /**
-   * Optional label for extended `FAB`.
-   */
-  label?: string;
-  /**
-   * Make the label text uppercased.
-   */
-  uppercase?: boolean;
   /**
    * Whether the speed dial is open.
    */
@@ -169,12 +157,8 @@ type Props = {
 const FABGroup = ({
   actions,
   icon,
-  label,
   open,
   onPress,
-  onLongPress,
-  preventStateChangeOnPress,
-  uppercase,
   accessibilityLabel,
   theme,
   style,
@@ -183,6 +167,7 @@ const FABGroup = ({
   testID,
   onStateChange,
   color: colorProp,
+  backdropColor,
 }: Props) => {
   const { current: backdrop } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -280,20 +265,18 @@ const FABGroup = ({
 
   return (
     <View pointerEvents="box-none" style={[styles.container, style]}>
-      {open && (
-        <TouchableWithoutFeedback onPress={close}>
-          <Animated.View
-            pointerEvents={open ? 'auto' : 'none'}
-            style={[
-              styles.backdrop,
-              {
-                opacity: backdropOpacity,
-                backgroundColor: colors.backdrop,
-              },
-            ]}
-          />
-        </TouchableWithoutFeedback>
-      )}
+      <TouchableWithoutFeedback onPress={close}>
+        <Animated.View
+          pointerEvents={open ? 'auto' : 'none'}
+          style={[
+            styles.backdrop,
+            {
+              opacity: backdropOpacity,
+              backgroundColor: backdropColor || colors.backdrop,
+            },
+          ]}
+        />
+      </TouchableWithoutFeedback>
       <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
         <View pointerEvents={open ? 'box-none' : 'none'}>
           {actions.map((it, i) => (
@@ -375,12 +358,10 @@ const FABGroup = ({
           ))}
         </View>
         <FAB
-          label={label}
           onPress={() => {
             onPress?.();
-            preventStateChangeOnPress || toggle();
+            toggle();
           }}
-          onLongPress={onLongPress}
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}
@@ -390,7 +371,6 @@ const FABGroup = ({
           accessibilityRole="button"
           accessibilityState={{ expanded: open }}
           style={[styles.fab, fabStyle]}
-          uppercase={uppercase}
           visible={visible}
           testID={testID}
         />

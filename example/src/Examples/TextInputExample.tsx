@@ -1,9 +1,21 @@
 import * as React from 'react';
-import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+} from 'react-native';
 import { TextInput, HelperText, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inputReducer, State } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
+import {
+  amber900,
+  pink400,
+  red500,
+  transparent,
+} from '../../../src/styles/colors';
 
 const MAX_LENGTH = 20;
 
@@ -17,20 +29,21 @@ const initialState: State = {
   outlinedLargeText: '',
   outlinedTextPassword: '',
   nameNoPadding: '',
+  nameRequired: '',
   flatDenseText: '',
   flatDense: '',
   outlinedDenseText: '',
   outlinedDense: '',
   flatMultiline: '',
   flatTextArea: '',
+  flatUnderlineColors: '',
   outlinedMultiline: '',
   outlinedTextArea: '',
+  outlinedColors: '',
+  outlinedLongLabel: '',
   maxLengthName: '',
   flatTextSecureEntry: true,
   outlineTextSecureEntry: true,
-  flatMultilineCustomHeightNoLabel: '',
-  flatMultilineCustomHeightNoLabelTop: '',
-  outlinedMultilineCustomHeightNoLabel: '',
   iconsColor: {
     flatLeftIcon: undefined,
     flatRightIcon: undefined,
@@ -70,20 +83,20 @@ const TextInputExample = () => {
     outlinedLargeText,
     outlinedTextPassword,
     nameNoPadding,
+    nameRequired,
     flatDenseText,
     flatDense,
     outlinedDenseText,
     outlinedDense,
     flatMultiline,
     flatTextArea,
+    flatUnderlineColors,
     outlinedMultiline,
     outlinedTextArea,
+    outlinedColors,
     maxLengthName,
     flatTextSecureEntry,
     outlineTextSecureEntry,
-    flatMultilineCustomHeightNoLabel,
-    flatMultilineCustomHeightNoLabelTop,
-    outlinedMultilineCustomHeightNoLabel,
     iconsColor: {
       flatLeftIcon,
       flatRightIcon,
@@ -258,6 +271,17 @@ const TextInputExample = () => {
           label="Disabled flat input"
         />
         <TextInput
+          style={styles.inputContainerStyle}
+          label="Flat input with custom underline colors"
+          placeholder="Type something"
+          value={flatUnderlineColors}
+          onChangeText={(flatUnderlineColors) =>
+            inputActionHandler('flatUnderlineColors', flatUnderlineColors)
+          }
+          underlineColor={pink400}
+          activeUnderlineColor={amber900}
+        />
+        <TextInput
           mode="outlined"
           style={styles.inputContainerStyle}
           label="Outlined input"
@@ -369,6 +393,27 @@ const TextInputExample = () => {
           style={styles.inputContainerStyle}
           label="Disabled outlined input"
         />
+        <TextInput
+          mode="outlined"
+          style={styles.inputContainerStyle}
+          label="Outlined input with custom outline colors"
+          placeholder="Type something"
+          value={outlinedColors}
+          onChangeText={(outlinedColors) =>
+            inputActionHandler('outlinedColors', outlinedColors)
+          }
+          outlineColor={pink400}
+          activeOutlineColor={amber900}
+        />
+        <TextInput
+          mode="outlined"
+          style={styles.inputContainerStyle}
+          label="Outlined with super long label which is truncating at some point"
+          placeholder="Type something"
+          onChangeText={(outlinedLongLabel) =>
+            inputActionHandler('outlinedLongLabel', outlinedLongLabel)
+          }
+        />
         <View style={styles.inputContainerStyle}>
           <TextInput
             label="Input with helper text"
@@ -408,7 +453,7 @@ const TextInputExample = () => {
         <View style={styles.inputContainerStyle}>
           <TextInput
             label="Input with no padding"
-            style={{ backgroundColor: 'transparent', paddingHorizontal: 0 }}
+            style={styles.noPaddingInput}
             placeholder="Enter username, only letters"
             value={nameNoPadding}
             error={!_isUsernameValid(nameNoPadding)}
@@ -426,19 +471,34 @@ const TextInputExample = () => {
         </View>
         <View style={styles.inputContainerStyle}>
           <TextInput
+            label={
+              <Text>
+                <Text style={{ color: red500 }}>*</Text> Label as component
+              </Text>
+            }
+            style={styles.noPaddingInput}
+            placeholder="Enter username, required"
+            value={nameRequired}
+            error={!nameRequired}
+            onChangeText={(nameRequired) =>
+              inputActionHandler('nameRequired', nameRequired)
+            }
+          />
+          <HelperText type="error" padding="none" visible={!nameRequired}>
+            Error: Username is required
+          </HelperText>
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
             label="Input with text align center"
-            style={{
-              textAlign: 'center',
-            }}
+            style={styles.centeredText}
           />
         </View>
         <View style={styles.inputContainerStyle}>
           <TextInput
             mode="outlined"
             label="Outlined input with text align center"
-            style={{
-              textAlign: 'center',
-            }}
+            style={styles.centeredText}
           />
         </View>
         <View style={styles.inputContainerStyle}>
@@ -447,47 +507,39 @@ const TextInputExample = () => {
             theme={{
               roundness: 25,
             }}
-            label="Custom rounded input"
+            label="Outlined text input with custom roundness"
           />
         </View>
-          <TextInput
-            style={[styles.inputContainerStyle, { height: 150 }]}
-            multiline
-            placeholder="Custom height, no label"
-            value={flatMultilineCustomHeightNoLabel}
-            onChangeText={(flatMultilineCustomHeightNoLabel) =>
-              inputActionHandler(
-                'flatMultilineCustomHeightNoLabel',
-                flatMultilineCustomHeightNoLabel
-              )
-            }
-          />
-          <TextInput
-            style={[styles.inputContainerStyle, { height: 150 }]}
-            multiline
-            placeholder="Custom height, no label, textAlignVertical to top"
-            textAlignVertical="top"
-            value={flatMultilineCustomHeightNoLabelTop}
-            onChangeText={(flatMultilineCustomHeightNoLabelTop) =>
-              inputActionHandler(
-                'flatMultilineCustomHeightNoLabelTop',
-                flatMultilineCustomHeightNoLabelTop
-              )
-            }
-          />
+        <View style={styles.inputContainerStyle}>
           <TextInput
             mode="outlined"
-            style={[styles.inputContainerStyle, { height: 150 }]}
-            multiline
-            placeholder="Custom height, outlined, no label"
-            value={outlinedMultilineCustomHeightNoLabel}
-            onChangeText={(outlinedMultilineCustomHeightNoLabel) =>
-              inputActionHandler(
-                'outlinedMultilineCustomHeightNoLabel',
-                outlinedMultilineCustomHeightNoLabel
-              )
-            }
+            label="Outlined text input without roundness"
+            theme={{ roundness: 0 }}
           />
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="outlined"
+            label="Outlined text input with error"
+            error
+          />
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="outlined"
+            label="Outlined multiline text input with fixed height"
+            multiline
+            style={styles.fixedHeight}
+          />
+        </View>
+        <View style={styles.inputContainerStyle}>
+          <TextInput
+            mode="flat"
+            label="Flat multiline text input with fixed height"
+            multiline
+            style={styles.fixedHeight}
+          />
+        </View>
       </ScreenWrapper>
     </TextInputAvoidingView>
   );
@@ -520,6 +572,16 @@ const styles = StyleSheet.create({
   },
   textArea: {
     height: 80,
+  },
+  noPaddingInput: {
+    backgroundColor: transparent,
+    paddingHorizontal: 0,
+  },
+  centeredText: {
+    textAlign: 'center',
+  },
+  fixedHeight: {
+    height: 100,
   },
 });
 

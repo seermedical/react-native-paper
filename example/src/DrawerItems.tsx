@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, I18nManager } from 'react-native';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import {
   Badge,
@@ -11,6 +11,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 import * as Updates from 'expo-updates';
+import { isWeb } from '../utils';
 
 type Props = {
   toggleTheme: () => void;
@@ -47,7 +48,10 @@ const DrawerItems = ({ toggleTheme, toggleRTL, isRTL, isDarkTheme }: Props) => {
 
   const _handleToggleRTL = () => {
     toggleRTL();
-    Updates.reloadAsync();
+    I18nManager.forceRTL(!isRTL);
+    if (isWeb) {
+      Updates.reloadAsync();
+    }
   };
 
   return (

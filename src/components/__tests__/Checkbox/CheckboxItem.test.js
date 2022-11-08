@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 import renderer from 'react-test-renderer';
+import { render } from 'react-native-testing-library';
 import Checkbox from '../../Checkbox';
 
 it('renders unchecked', () => {
@@ -46,4 +47,43 @@ it('can render leading checkbox control', () => {
     )
     .toJSON();
   expect(tree).toMatchSnapshot();
+});
+
+it('should have `accessibilityState={ checked: true }` when `status="checked"`', () => {
+  const { getByA11yState } = render(
+    <Checkbox.Item status="checked" label="Checked Button" />
+  );
+
+  const element = getByA11yState({ checked: true });
+  expect(element).toBeTruthy();
+});
+
+it('should have `accessibilityState={ checked: false }` when `status="unchecked"', () => {
+  const { getByA11yState } = render(
+    <Checkbox.Item status="unchecked" label="Unchecked Button" />
+  );
+
+  const element = getByA11yState({ checked: false });
+  expect(element).toBeTruthy();
+});
+
+it('should have `accessibilityState={ checked: false }` when `status="indeterminate"', () => {
+  const { getByA11yState } = render(
+    <Checkbox.Item status="indeterminate" label="Indeterminate Button" />
+  );
+
+  const element = getByA11yState({ checked: false });
+  expect(element).toBeTruthy();
+});
+
+it('disables the row when the prop disabled is true', () => {
+  const { getByA11yLabel } = render(
+    <Checkbox.Item accessibilityLabel="some checkbox" disabled />
+  );
+
+  const touchable = getByA11yLabel('some checkbox');
+
+  expect(touchable.props).toMatchObject({
+    accessibilityState: { disabled: true },
+  });
 });

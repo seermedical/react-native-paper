@@ -17,6 +17,7 @@ const LabelBackground = ({
     roundness,
   },
   labelStyle,
+  maxFontSizeMultiplier,
 }: LabelBackgroundProps) => {
   const hasFocus = hasActiveOutline || parentState.value;
   const opacity = parentState.labeled.interpolate({
@@ -45,6 +46,7 @@ const LabelBackground = ({
             styles.view,
             {
               backgroundColor,
+              maxHeight: Math.max(roundness / 3, 2),
               opacity,
               bottom: Math.max(roundness, 2),
             },
@@ -70,9 +72,13 @@ const LabelBackground = ({
                   }),
                 },
               ],
+              maxWidth:
+                parentState.labelLayout.width -
+                2 * placeholderStyle.paddingHorizontal,
             },
           ]}
           numberOfLines={1}
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
         >
           {label}
         </AnimatedText>,
@@ -87,7 +93,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 6,
     left: 10,
-    width: 8,
+    width: 12,
   },
   outlinedLabel: {
     position: 'absolute',

@@ -17,7 +17,7 @@ import { white } from '../../styles/colors';
 
 import type { $RemoveChildren } from '../../types';
 
-type Props = $RemoveChildren<typeof View> & {
+export type Props = $RemoveChildren<typeof View> & {
   /**
    * Custom color for the text.
    */
@@ -110,7 +110,6 @@ const AppbarContent = ({
           accessibilityTraits="header"
           // @ts-expect-error React Native doesn't accept 'heading' as it's web-only
           accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
-          allowFontScaling={false} // Prevent headers from scaling text size
         >
           {title}
         </Text>
@@ -118,7 +117,6 @@ const AppbarContent = ({
           <Text
             style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
             numberOfLines={1}
-            allowFontScaling={false} // Prevent headers from scaling text size
           >
             {subtitle}
           </Text>

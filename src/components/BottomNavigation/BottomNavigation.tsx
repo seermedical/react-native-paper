@@ -7,22 +7,23 @@ import {
   StyleSheet,
   StyleProp,
   Platform,
-  Keyboard,
   ViewStyle,
 } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import color from 'color';
-import overlay from '../styles/overlay';
-import Icon, { IconSource } from './Icon';
-import Surface from './Surface';
-import Badge from './Badge';
-import TouchableRipple from './TouchableRipple/TouchableRipple';
-import Text from './Typography/Text';
-import { black, white } from '../styles/colors';
-import { withTheme } from '../core/theming';
-import useAnimatedValue from '../utils/useAnimatedValue';
-import useAnimatedValueArray from '../utils/useAnimatedValueArray';
-import useLayout from '../utils/useLayout';
+import overlay from '../../styles/overlay';
+import Icon, { IconSource } from '../Icon';
+import Surface from '../Surface';
+import Badge from '../Badge';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
+import { black, white } from '../../styles/colors';
+import { withTheme } from '../../core/theming';
+import useAnimatedValue from '../../utils/useAnimatedValue';
+import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
+import useLayout from '../../utils/useLayout';
+import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
+import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 
 type Route = {
   key: string;
@@ -53,7 +54,7 @@ type TouchableProps = TouchableWithoutFeedbackProps & {
   rippleColor?: string;
 };
 
-type Props = {
+export type Props = {
   /**
    * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
    *
@@ -225,6 +226,10 @@ type Props = {
    * ```
    */
   barStyle?: StyleProp<ViewStyle>;
+  /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -343,6 +348,7 @@ const BottomNavigation = ({
   onIndexChange,
   shifting = navigationState.routes.length > 3,
   safeAreaInsets,
+  labelMaxFontSizeMultiplier = 1,
 }: Props) => {
   const { scale } = theme.animation;
 
@@ -482,25 +488,10 @@ const BottomNavigation = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  React.useEffect(() => {
-    if (Platform.OS === 'ios') {
-      Keyboard.addListener('keyboardWillShow', handleKeyboardShow);
-      Keyboard.addListener('keyboardWillHide', handleKeyboardHide);
-    } else {
-      Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
-      Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
-    }
-
-    return () => {
-      if (Platform.OS === 'ios') {
-        Keyboard.removeListener('keyboardWillShow', handleKeyboardShow);
-        Keyboard.removeListener('keyboardWillHide', handleKeyboardHide);
-      } else {
-        Keyboard.removeListener('keyboardDidShow', handleKeyboardShow);
-        Keyboard.removeListener('keyboardDidHide', handleKeyboardHide);
-      }
-    };
-  }, [handleKeyboardHide, handleKeyboardShow]);
+  useIsKeyboardShown({
+    onShow: handleKeyboardShow,
+    onHide: handleKeyboardHide,
+  });
 
   const prevNavigationState = React.useRef<NavigationState>();
 
@@ -631,13 +622,15 @@ const BottomNavigation = ({
             : FAR_FAR_AWAY;
 
           return (
-            <Animated.View
+            <BottomNavigationRouteScreen
               key={route.key}
               pointerEvents={focused ? 'auto' : 'none'}
               accessibilityElementsHidden={!focused}
               importantForAccessibility={
                 focused ? 'auto' : 'no-hide-descendants'
               }
+              index={index}
+              visibility={opacity}
               style={[StyleSheet.absoluteFill, { opacity }]}
               collapsable={false}
               removeClippedSubviews={
@@ -649,7 +642,7 @@ const BottomNavigation = ({
               <Animated.View style={[styles.content, { top }]}>
                 {renderScene({ route, jumpTo })}
               </Animated.View>
-            </Animated.View>
+            </BottomNavigationRouteScreen>
           );
         })}
       </View>
@@ -868,7 +861,7 @@ const BottomNavigation = ({
                             })
                           ) : (
                             <Text
-                              allowFontScaling={false}
+                              maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
                               style={[styles.label, { color: activeTintColor }]}
                             >
                               {getLabelText({ route })}
@@ -890,7 +883,9 @@ const BottomNavigation = ({
                               })
                             ) : (
                               <Text
-                                allowFontScaling={false}
+                                maxFontSizeMultiplier={
+                                  labelMaxFontSizeMultiplier
+                                }
                                 selectable={false}
                                 style={[
                                   styles.label,
@@ -1002,6 +997,7 @@ const styles = StyleSheet.create({
   // eslint-disable-next-line react-native/no-color-literals
   label: {
     fontSize: 12,
+    height: BAR_HEIGHT,
     textAlign: 'center',
     backgroundColor: 'transparent',
     ...(Platform.OS === 'web'
