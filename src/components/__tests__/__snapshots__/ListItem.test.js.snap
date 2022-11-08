@@ -143,6 +143,7 @@ exports[`renders list item with custom description 1`] = `
                     Object {
                       "paddingRight": 4,
                     },
+                    undefined,
                   ]
                 }
               >

@@ -4,6 +4,7 @@ import type { PortalMethods } from './PortalHost';
 type Props = {
   manager: PortalMethods;
   children: React.ReactNode;
+  isFocused: boolean;
 };
 
 export default class PortalConsumer extends React.Component<Props> {
@@ -13,13 +14,24 @@ export default class PortalConsumer extends React.Component<Props> {
     // Delay updating to prevent React from going to infinite loop
     await Promise.resolve();
 
-    this.key = this.props.manager.mount(this.props.children);
+    this.key = this.props.manager.mount(
+      this.props.children,
+      this.props.isFocused
+    );
   }
 
   componentDidUpdate() {
     this.checkManager();
 
-    this.props.manager.update(this.key, this.props.children);
+    // Because of the delay in componentDidMount, componentDidUpdate
+    // can run before a key is set causing corrupt data in the manager.
+    if (this.key !== undefined) {
+      this.props.manager.update(
+        this.key,
+        this.props.children,
+        this.props.isFocused
+      );
+    }
   }
 
   componentWillUnmount() {

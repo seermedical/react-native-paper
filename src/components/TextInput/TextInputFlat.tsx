@@ -206,6 +206,7 @@ const TextInputFlat = ({
 
   const paddingFlat = adjustPaddingFlat({
     ...paddingSettings,
+    textAlignVertical: rest.textAlignVertical,
     pad,
   });
 

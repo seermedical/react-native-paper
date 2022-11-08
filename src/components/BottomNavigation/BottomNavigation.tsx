@@ -862,6 +862,7 @@ const BottomNavigation = ({
                           ) : (
                             <Text
                               maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+                              allowFontScaling={false}
                               style={[styles.label, { color: activeTintColor }]}
                             >
                               {getLabelText({ route })}
@@ -891,6 +892,7 @@ const BottomNavigation = ({
                                   styles.label,
                                   { color: inactiveTintColor },
                                 ]}
+                                allowFontScaling={false}
                               >
                                 {getLabelText({ route })}
                               </Text>

@@ -2966,6 +2966,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -3007,6 +3008,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   selectable={false}
                   style={
@@ -3211,6 +3213,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -3252,6 +3255,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   selectable={false}
                   style={
@@ -3456,6 +3460,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -3497,6 +3502,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   selectable={false}
                   style={
@@ -3837,6 +3843,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -4040,6 +4047,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -4243,6 +4251,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -4561,6 +4570,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -4602,6 +4612,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   selectable={false}
                   style={
@@ -4806,6 +4817,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -4847,6 +4859,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   selectable={false}
                   style={
@@ -5051,6 +5064,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -5092,6 +5106,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   selectable={false}
                   style={
@@ -5431,6 +5446,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -5634,6 +5650,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -5837,6 +5854,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -6040,6 +6058,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [
@@ -6243,6 +6262,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <Text
+                  allowFontScaling={false}
                   maxFontSizeMultiplier={1}
                   style={
                     Array [

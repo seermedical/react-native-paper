@@ -389,6 +389,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       accessibilityRole="header"
       accessibilityTraits="header"
       accessible={true}
+      allowFontScaling={false}
       numberOfLines={1}
       style={
         Array [
