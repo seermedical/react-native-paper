@@ -112,6 +112,34 @@ const data: Data[] = [
     android:
       'https://play.google.com/store/apps/details?id=com.frederictech.zoomapto',
   },
+  {
+    color: '#1DE9B6',
+    name: 'Groovy - Build Habits Together',
+    image: 'showcase/groovy.png',
+    ios: 'https://apps.apple.com/us/app/groovy-set-your-goals/id1562352498',
+    android:
+      'https://play.google.com/store/apps/details?id=com.gabrieldierks.groovy',
+  },
+  {
+    color: '#673AB7',
+    name: 'Vibemap - Find Your Vibe',
+    image: 'showcase/vibemap.png',
+    ios: 'https://apps.apple.com/us/app/vibemap/id1496385897#?platform=iphone',
+    android:
+      'https://play.google.com/store/apps/details?id=com.vibemap.hotspots',
+  },
+  {
+    color: '#6200EE',
+    name: 'Clutch - Transmission Remote',
+    image: 'showcase/clutch.png',
+    android: 'https://play.google.com/store/apps/details?id=eu.tmdpw.clutch',
+  },
+  {
+    color: '#111827',
+    name: 'Quakemap',
+    image: 'showcase/quakemap.png',
+    android: 'https://play.google.com/store/apps/details?id=com.sal.quakemap',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {

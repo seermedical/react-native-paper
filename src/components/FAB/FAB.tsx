@@ -21,7 +21,7 @@ import type { $RemoveChildren } from '../../types';
 
 getContrastingColor;
 
-type Props = $RemoveChildren<typeof Surface> & {
+export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Icon to display for the `FAB`.
    */
@@ -141,11 +141,9 @@ const FAB = ({
     new Animated.Value(visible ? 1 : 0)
   );
   const { scale } = theme.animation;
-  const [showFAB, setShowFAB] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     if (visible) {
-      setShowFAB(true);
       Animated.timing(visibility, {
         toValue: 1,
         duration: 200 * scale,
@@ -156,7 +154,7 @@ const FAB = ({
         toValue: 0,
         duration: 150 * scale,
         useNativeDriver: true,
-      }).start(() => setShowFAB(false));
+      }).start();
     }
   }, [visible, scale, visibility]);
 
@@ -167,9 +165,8 @@ const FAB = ({
     .rgb()
     .string();
 
-  const {
-    backgroundColor = disabled ? disabledColor : theme.colors.accent,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const { backgroundColor = disabled ? disabledColor : theme.colors.accent } =
+    (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   let foregroundColor;
 
@@ -190,7 +187,7 @@ const FAB = ({
 
   const rippleColor = color(foregroundColor).alpha(0.32).rgb().string();
 
-  return showFAB ? (
+  return (
     <Surface
       {...rest}
       style={
@@ -254,8 +251,6 @@ const FAB = ({
         </View>
       </TouchableRipple>
     </Surface>
-  ) : (
-    <></>
   );
 };
 

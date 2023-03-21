@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, Image, Dimensions, StyleSheet, Platform } from 'react-native';
 import { BottomNavigation } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type RoutesState = Array<{
   key: string;
@@ -32,6 +33,7 @@ const PhotoGallery = ({ route }: Route) => {
 };
 
 const BottomNavigationExample = () => {
+  const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState<RoutesState>([
     { key: 'album', title: 'Album', icon: 'image-album', color: '#6200ee' },
@@ -58,8 +60,10 @@ const BottomNavigationExample = () => {
 
   return (
     <BottomNavigation
+      safeAreaInsets={{ bottom: insets.bottom }}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
+      labelMaxFontSizeMultiplier={2}
       renderScene={BottomNavigation.SceneMap({
         album: PhotoGallery,
         library: PhotoGallery,

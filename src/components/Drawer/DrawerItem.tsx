@@ -6,7 +6,7 @@ import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * The label text of the item.
    */
@@ -85,19 +85,16 @@ const DrawerItem = ({
   const labelMargin = icon ? 32 : 0;
 
   return (
-    <View
-      {...rest}
-      style={[
-        styles.container,
-        { backgroundColor, borderRadius: roundness },
-        style,
-      ]}
-    >
+    <View {...rest}>
       <TouchableRipple
         borderless
         delayPressIn={0}
         onPress={onPress}
-        style={{ borderRadius: roundness }}
+        style={[
+          styles.container,
+          { backgroundColor, borderRadius: roundness },
+          style,
+        ]}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={active ? ['button', 'selected'] : 'button'}
         accessibilityComponentType="button"

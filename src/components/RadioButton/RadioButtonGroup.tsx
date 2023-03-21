@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-type Props = {
+export type Props = {
   /**
    * Function to execute on selection change.
    */
@@ -67,9 +67,7 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
  */
 const RadioButtonGroup = ({ value, onValueChange, children }: Props) => (
   <RadioButtonContext.Provider value={{ value, onValueChange }}>
-    <View accessible accessibilityRole="radiogroup">
-      {children}
-    </View>
+    <View accessibilityRole="radiogroup">{children}</View>
   </RadioButtonContext.Provider>
 );
 

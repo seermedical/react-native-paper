@@ -14,6 +14,7 @@ import {
   ViewStyle,
   ScrollView,
   findNodeHandle,
+  NativeEventSubscription,
 } from 'react-native';
 
 import { withTheme } from '../../core/theming';
@@ -22,8 +23,9 @@ import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import MenuItem from './MenuItem';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import { addEventListener } from '../../utils/addEventListener';
 
-type Props = {
+export type Props = {
   /**
    * Whether the Menu is currently visible.
    */
@@ -166,6 +168,8 @@ class Menu extends React.Component<Props, State> {
 
   private anchor?: View | null = null;
   private menu?: View | null = null;
+  private backHandlerSubscription: NativeEventSubscription | undefined;
+  private dimensionsSubscription: NativeEventSubscription | undefined;
 
   private isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
     !React.isValidElement(anchor) &&
@@ -239,16 +243,22 @@ class Menu extends React.Component<Props, State> {
   };
 
   private attachListeners = () => {
-    BackHandler.addEventListener('hardwareBackPress', this.handleDismiss);
-    Dimensions.addEventListener('change', this.handleDismiss);
-
+    this.backHandlerSubscription = addEventListener(
+      BackHandler,
+      'hardwareBackPress',
+      this.handleDismiss
+    );
+    this.dimensionsSubscription = addEventListener(
+      Dimensions,
+      'change',
+      this.handleDismiss
+    );
     this.isBrowser() && document.addEventListener('keyup', this.handleKeypress);
   };
 
   private removeListeners = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleDismiss);
-    Dimensions.removeEventListener('change', this.handleDismiss);
-
+    this.backHandlerSubscription?.remove();
+    this.dimensionsSubscription?.remove();
     this.isBrowser() &&
       document.removeEventListener('keyup', this.handleKeypress);
   };
@@ -536,7 +546,7 @@ class Menu extends React.Component<Props, State> {
       >
         {this.isCoordinate(anchor) ? null : anchor}
         {rendered ? (
-          <Portal isFocused={visible}>
+          <Portal>
             <TouchableWithoutFeedback
               accessibilityLabel={overlayAccessibilityLabel}
               accessibilityRole="button"

@@ -7,13 +7,16 @@ import {
   View,
   ViewStyle,
   I18nManager,
+  TextStyle,
 } from 'react-native';
 import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
+export type Props = React.ComponentPropsWithRef<
+  typeof TouchableWithoutFeedback
+> & {
   /**
    * Text content of the `DataTableTitle`.
    */
@@ -35,6 +38,10 @@ type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
    */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Text content style of the `DataTableTitle`.
+   */
+  textStyle?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -80,6 +87,7 @@ const DataTableTitle = ({
   onPress,
   sortDirection,
   theme,
+  textStyle,
   style,
   numberOfLines = 1,
   ...rest
@@ -122,7 +130,18 @@ const DataTableTitle = ({
         <Text
           style={[
             styles.cell,
+            // height must scale with numberOfLines
+            { maxHeight: 24 * numberOfLines },
+            // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
+            numberOfLines > 1
+              ? numeric
+                ? I18nManager.isRTL
+                  ? styles.leftText
+                  : styles.rightText
+                : styles.centerText
+              : {},
             sortDirection ? styles.sorted : { color: textColor },
+            textStyle,
           ]}
           numberOfLines={numberOfLines}
         >
@@ -143,12 +162,23 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
+  rightText: {
+    textAlign: 'right',
+  },
+
+  leftText: {
+    textAlign: 'left',
+  },
+
+  centerText: {
+    textAlign: 'center',
+  },
+
   right: {
     justifyContent: 'flex-end',
   },
 
   cell: {
-    height: 24,
     lineHeight: 24,
     fontSize: 12,
     fontWeight: '500',

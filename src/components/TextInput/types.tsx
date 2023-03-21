@@ -5,8 +5,10 @@ import type {
   LayoutChangeEvent,
   ColorValue,
 } from 'react-native';
-import type { TextInputProps } from './TextInput';
+import type { Props as TextInputProps } from './TextInput';
 import type { $Omit } from './../../types';
+
+export type TextInputLabelProp = string | React.ReactElement;
 
 export type RenderProps = {
   ref: (a?: NativeTextInput | null) => void;
@@ -62,21 +64,25 @@ export type LabelProps = {
   labelTranslationXOffset?: number;
   placeholderColor: string | null;
   backgroundColor?: ColorValue;
-  label?: string | null;
+  label?: TextInputLabelProp | null;
   hasActiveOutline?: boolean | null;
   activeColor: string;
   errorColor?: string;
   error?: boolean | null;
   onLayoutAnimatedText: (args: any) => void;
   roundness: number;
+  maxFontSizeMultiplier?: number | undefined | null;
 };
 export type InputLabelProps = {
   parentState: State;
   labelProps: LabelProps;
   labelBackground?: any;
+  maxFontSizeMultiplier?: number | undefined | null;
 };
+
 export type LabelBackgroundProps = {
   labelProps: LabelProps;
   labelStyle: any;
   parentState: State;
+  maxFontSizeMultiplier?: number | undefined | null;
 };

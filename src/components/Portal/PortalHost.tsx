@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import PortalManager from './PortalManager';
 
-type Props = {
+export type Props = {
   children: React.ReactNode;
 };
 type State = {
@@ -36,22 +36,24 @@ export type PortalMethods = {
 
 export const PortalContext = React.createContext<PortalMethods>(null as any);
 
-const updateVisibilityForKey = (key: number, isFocused: boolean) => ({
-  portalVisibility,
-}: Pick<State, 'portalVisibility'>): Pick<State, 'portalVisibility'> => ({
-  portalVisibility: isFocused
-    ? { ...portalVisibility, [key]: true } // If it's focused, set the key to true
-    : portalVisibility[key] === undefined //
-    ? { ...portalVisibility } // If not focused and key doesn't have a value, just return current object
-    : Object.keys(portalVisibility).reduce((acc, keyIterator) => {
-        const keyIndex = parseInt(keyIterator);
-        // If not focused but key already has a value, remove the key
-        if (keyIndex !== key) {
-          acc[keyIndex] = portalVisibility[keyIndex];
-        }
-        return acc;
-      }, {} as { [key in number]: boolean }),
-});
+const updateVisibilityForKey =
+  (key: number, isFocused: boolean) =>
+  ({
+    portalVisibility,
+  }: Pick<State, 'portalVisibility'>): Pick<State, 'portalVisibility'> => ({
+    portalVisibility: isFocused
+      ? { ...portalVisibility, [key]: true } // If it's focused, set the key to true
+      : portalVisibility[key] === undefined //
+      ? { ...portalVisibility } // If not focused and key doesn't have a value, just return current object
+      : Object.keys(portalVisibility).reduce((acc, keyIterator) => {
+          const keyIndex = parseInt(keyIterator);
+          // If not focused but key already has a value, remove the key
+          if (keyIndex !== key) {
+            acc[keyIndex] = portalVisibility[keyIndex];
+          }
+          return acc;
+        }, {} as { [key in number]: boolean }),
+  });
 
 /**
  * Portal host renders all of its children `Portal` elements.

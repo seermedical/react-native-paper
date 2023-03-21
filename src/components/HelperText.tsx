@@ -11,7 +11,7 @@ import AnimatedText from './Typography/AnimatedText';
 import { withTheme } from '../core/theming';
 import type { $Omit } from '../types';
 
-type Props = $Omit<
+export type Props = $Omit<
   $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
   'type'
 > & {
@@ -94,6 +94,8 @@ const HelperText = ({
 
   const { scale } = theme.animation;
 
+  const { maxFontSizeMultiplier = 1.5 } = rest;
+
   React.useEffect(() => {
     if (visible) {
       // show text
@@ -150,6 +152,7 @@ const HelperText = ({
         },
         style,
       ]}
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
       {...rest}
     >
       {rest.children}

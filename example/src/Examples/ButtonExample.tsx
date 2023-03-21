@@ -33,7 +33,7 @@ const ButtonExample = () => {
             icon="camera"
             onPress={() => {}}
             style={styles.button}
-            contentStyle={{ flexDirection: 'row-reverse' }}
+            contentStyle={styles.flexReverse}
           >
             Icon right
           </Button>
@@ -81,10 +81,7 @@ const ButtonExample = () => {
             mode="outlined"
             onPress={() => {}}
             style={styles.button}
-            labelStyle={{
-              fontWeight: '800',
-              fontSize: 24,
-            }}
+            labelStyle={styles.fontStyles}
           >
             Custom Font
           </Button>
@@ -134,8 +131,7 @@ const ButtonExample = () => {
           <Button
             mode="outlined"
             icon={{
-              uri:
-                'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
+              uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
             }}
             onPress={() => {}}
             style={styles.button}
@@ -179,6 +175,13 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 4,
+  },
+  flexReverse: {
+    flexDirection: 'row-reverse',
+  },
+  fontStyles: {
+    fontWeight: '800',
+    fontSize: 24,
   },
 });
 

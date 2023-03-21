@@ -7,7 +7,8 @@ import {
   FLAT_INPUT_OFFSET,
 } from './constants';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
-import type { TextInputProps } from './TextInput';
+import type { Props as TextInputProps } from './TextInput';
+import type { TextInputLabelProp } from './types';
 
 type PaddingProps = {
   height: number | null;
@@ -17,7 +18,7 @@ type PaddingProps = {
   topPosition: number;
   fontSize: number;
   lineHeight?: number;
-  label?: string | null;
+  label?: TextInputLabelProp | null;
   scale: number;
   offset: number;
   isAndroid: boolean;
